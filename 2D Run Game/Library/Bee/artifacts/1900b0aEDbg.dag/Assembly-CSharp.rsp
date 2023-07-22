@@ -377,11 +377,16 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
-"Assets/Script/Character.cs"
-"Assets/Script/ObjectPoolManager.cs"
+"Assets/Script/InterfaceManager.cs"
+"Assets/Script/Manager/ObjectPoolManager.cs"
+"Assets/Script/Manager/SoundManager.cs"
 "Assets/Script/Parallax.cs"
-"Assets/Script/Platform.cs"
-"Assets/Script/PlatformManager.cs"
+"Assets/Script/Platform/Platform.cs"
+"Assets/Script/Platform/PlatformManager.cs"
+"Assets/Script/State/Character.cs"
+"Assets/Script/State/Die.cs"
+"Assets/Script/State/Jump.cs"
+"Assets/Script/State/Run.cs"
 -langversion:9.0
 
 /deterministic
