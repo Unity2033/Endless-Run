@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,10 +15,10 @@ public class Runner : MonoBehaviour
 {
     [SerializeField] RoadLine roadLine;
     [SerializeField] float positionX = 4f;
-    [SerializeField] float jumpPower = 20f;
 
-    [SerializeField] ObjectSound objectSound = new ObjectSound();
+    [SerializeField] Sound sound = new Sound();
 
+    [SerializeField] Transform rayPosition;
     [SerializeField] UnityEvent playerEvent;
 
     private Animator animator ;
@@ -28,6 +29,7 @@ public class Runner : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+
     void Update()
     {
         Move();
@@ -35,28 +37,58 @@ public class Runner : MonoBehaviour
         Status(roadLine);        
     }
 
+    public Collider[] colls;
+    public Vector3 boxSize = new Vector3(10, 10, 10);
+
+    public void SideDetect()
+    {
+        colls = Physics.OverlapBox(transform.position, boxSize, transform.rotation);
+
+        Debug.Log(colls.Length);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(Vector3.zero, boxSize);
+    }
+
     public void Move()
     {
+        SideDetect();
+
         if (Input.GetKeyDown(KeyCode.LeftArrow) && Time.timeScale != 0 )
         {
-            AudioManager.instance.Sound(objectSound.clips[0]);
-            if(roadLine == RoadLine.LEFT)
+            // AudioManager.instance.Sound(sound.clips[0]);
+
+            if (roadLine == RoadLine.LEFT)
             {
                 roadLine = RoadLine.LEFT;
             }
-            else { roadLine--; }
-            
+            else 
+            {
+                roadLine--; 
+            }
         }
+
         if (Input.GetKeyDown(KeyCode.RightArrow) && Time.timeScale != 0 )
         {
-            AudioManager.instance.Sound(objectSound.clips[0]);
+            // AudioManager.instance.Sound(sound.clips[0]);
+
             if (roadLine == RoadLine.RIGHT)
             {
                 roadLine = RoadLine.RIGHT;
             }
-            else { roadLine++; }
+            else 
+            {
+                roadLine++;
+            }
+
         }
     }
+
+
 
     public void Status(RoadLine roadLine)
     {

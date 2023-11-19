@@ -19,6 +19,9 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            return;
         }
+
+        DontDestroyOnLoad(instance.gameObject);
     }
 }

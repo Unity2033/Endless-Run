@@ -15,7 +15,6 @@ public class AudioManager : Singleton<AudioManager>
         LoadVolume();
     }
 
-
     public void Sound(AudioClip clip)
     {        
         sfxSource.PlayOneShot(clip);

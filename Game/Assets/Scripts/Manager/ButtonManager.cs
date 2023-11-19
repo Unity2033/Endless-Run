@@ -1,57 +1,57 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
+
+public enum ButtonType
+{
+    START,
+    RANKING,
+    OPTION,
+    QUIT
+}
+
 
 public class ButtonManager : MonoBehaviour
 {
     [SerializeField] int createCount;
-    [SerializeField] Button buttonprefab;
+    [SerializeField] Button buttonPrefab;
     [SerializeField] Transform createPosition;
-    [SerializeField] List<string> buttonTexts;    
 
-    List<Button> buttons = new List<Button>();    
-    Button button;
-    
+    [SerializeField] Sprite [ ] buttonSprite;
+    List<Button> buttons = new List<Button>();
+
     void Start()
     {
         buttons.Capacity = 10;
+
         CreateButton();
-        Register();
     }
 
     public void CreateButton()
     {
         for (int i = 0; i < createCount; i++)
         {
-            button = Instantiate(buttonprefab);
+            Button button = Instantiate(buttonPrefab);
 
             button.transform.SetParent(createPosition);
 
-            button.GetComponentInChildren<TextMeshProUGUI>().text = buttonTexts[i];
+            button.GetComponent<Image>().sprite = buttonSprite[i];
 
             buttons.Add(button);
         }
-
     }
 
-
-    private void Register()
-    {        
-        buttons[0].onClick.AddListener(StartGame);            
-        buttons[1].onClick.AddListener(B);             
-        buttons[2].onClick.AddListener(Option);               
-        buttons[3].onClick.AddListener(Quit); 
-    }
-
-    public void StartGame()
+    public void GameStart()
     {
-        //Debug.Log("Start");
-        StartCoroutine(GameManager.instance.StartRoutine(4));        
+        Debug.Log("Game Start");
     }
 
-    public void B()
+    public void Ranking()
     {    
         Debug.Log("B");
     }
@@ -67,8 +67,6 @@ public class ButtonManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
-#endif
-
-     
+#endif  
     }
 }
