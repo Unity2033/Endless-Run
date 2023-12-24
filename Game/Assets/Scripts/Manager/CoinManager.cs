@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CoinManager : MonoBehaviour
 {
-    [SerializeField] int createCount = 15;
     [SerializeField] int newZ = 2;
+    [SerializeField] int createCount = 15;
 
     [SerializeField] GameObject prefab;
 

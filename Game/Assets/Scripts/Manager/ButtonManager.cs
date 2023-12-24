@@ -2,63 +2,47 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
-
-public enum ButtonType
-{
-    START,
-    RANKING,
-    OPTION,
-    QUIT
-}
+using UnityEngine.SceneManagement;
 
 
 public class ButtonManager : MonoBehaviour
 {
     [SerializeField] int createCount;
     [SerializeField] Button buttonPrefab;
-    [SerializeField] Transform createPosition;
 
-    [SerializeField] Sprite [ ] buttonSprite;
-    List<Button> buttons = new List<Button>();
+    [SerializeField] List<string> textList= new List<string>();
+    [SerializeField] List<Button> buttonList = new List<Button>();
 
     void Start()
     {
-        buttons.Capacity = 10;
+        buttonList.Capacity = 10;
 
-        CreateButton();
+        SetTextMeshPro();
     }
 
-    public void CreateButton()
+    public void SetTextMeshPro()
     {
         for (int i = 0; i < createCount; i++)
         {
-            Button button = Instantiate(buttonPrefab);
-
-            button.transform.SetParent(createPosition);
-
-            button.GetComponent<Image>().sprite = buttonSprite[i];
-
-            buttons.Add(button);
+            buttonList[i].GetComponentInChildren<TextMeshProUGUI>().text = textList[i];
         }
     }
 
-    public void GameStart()
+    public void NewGame()
     {
-        Debug.Log("Game Start");
+        SceneManager.LoadScene(1);
     }
 
-    public void Ranking()
+    public void Shop()
     {    
         Debug.Log("B");
     }
 
     public void Option()
     {
-        AudioManager.instance.Open();
+    
     }
 
     public void Quit()

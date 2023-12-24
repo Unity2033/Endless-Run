@@ -13,22 +13,19 @@ public enum RoadLine
 
 public class Runner : MonoBehaviour
 {
+    public Animator animator;
+
     [SerializeField] RoadLine roadLine;
     [SerializeField] float positionX = 4f;
 
     [SerializeField] Sound sound = new Sound();
 
-    [SerializeField] Transform rayPosition;
-    [SerializeField] UnityEvent playerEvent;
-
-    private Animator animator ;
 
     void Start()
     {
         roadLine = RoadLine.MIDDLE;
         animator = GetComponent<Animator>();
     }
-
 
     void Update()
     {
@@ -37,27 +34,8 @@ public class Runner : MonoBehaviour
         Status(roadLine);        
     }
 
-    public Collider[] colls;
-    public Vector3 boxSize = new Vector3(10, 10, 10);
-
-    public void SideDetect()
-    {
-        colls = Physics.OverlapBox(transform.position, boxSize, transform.rotation);
-
-        Debug.Log(colls.Length);
-    }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.matrix = transform.localToWorldMatrix;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(Vector3.zero, boxSize);
-    }
-
     public void Move()
     {
-        SideDetect();
-
         if (Input.GetKeyDown(KeyCode.LeftArrow) && Time.timeScale != 0 )
         {
             // AudioManager.instance.Sound(sound.clips[0]);
@@ -84,11 +62,8 @@ public class Runner : MonoBehaviour
             {
                 roadLine++;
             }
-
         }
     }
-
-
 
     public void Status(RoadLine roadLine)
     {
@@ -112,8 +87,12 @@ public class Runner : MonoBehaviour
 
         if(item != null)
         {            
-            item.Use();
-            other.GetComponentInChildren<MeshRenderer>().enabled = false;
+            item.Use(this);
+
+            if (other.GetComponentInChildren<MeshRenderer>() != null)
+            {
+                other.GetComponentInChildren<MeshRenderer>().enabled = false;
+            }
         }
 
         if(other.CompareTag("Obstacle"))
@@ -122,15 +101,8 @@ public class Runner : MonoBehaviour
         }
     }
 
-
     private void Death()
     {
-        playerEvent.Invoke();
         animator.Play("Die");
-    }
-
-    public void OnGameOverUI()
-    {
-        GameManager.instance.GameOverPanel();
     }
 }
