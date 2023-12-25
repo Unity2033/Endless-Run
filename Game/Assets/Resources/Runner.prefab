@@ -1332,8 +1332,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.4, y: 1.7, z: 0.4}
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Size: {x: 0.4, y: 1.7, z: 0.35}
+  m_Center: {x: 0, y: 0.85, z: 0}
 --- !u!95 &5501645545898033077
 Animator:
   serializedVersion: 5
@@ -1367,15 +1367,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58910f9ecadf40444af8cfd3e11df51a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   roadLine: 0
   positionX: 4
   sound:
-    clips: []
-  playerEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  colliders: []
-  boxSize: {x: 10, y: 10, z: 10}
+    clips:
+    - {fileID: 8300000, guid: bdf81dba354b85a4fb3bc8511d8070a8, type: 3}
 --- !u!1 &4693435954453114049
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,12 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
-    
+        Initialize();
+    }
+
+    public void Initialize()
+    {
+        Time.timeScale = 1.0f;
     }
 
     public void GameOver()
@@ -17,7 +22,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 0.0f;        
     }
 
-    public void Retry()
+    public void Resume()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

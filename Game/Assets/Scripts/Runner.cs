@@ -29,6 +29,9 @@ public class Runner : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0) 
+            return;
+
         Move();
 
         Status(roadLine);        
@@ -36,10 +39,8 @@ public class Runner : MonoBehaviour
 
     public void Move()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && Time.timeScale != 0 )
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            // AudioManager.instance.Sound(sound.clips[0]);
-
             if (roadLine == RoadLine.LEFT)
             {
                 roadLine = RoadLine.LEFT;
@@ -50,10 +51,8 @@ public class Runner : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) && Time.timeScale != 0 )
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            // AudioManager.instance.Sound(sound.clips[0]);
-
             if (roadLine == RoadLine.RIGHT)
             {
                 roadLine = RoadLine.RIGHT;
@@ -63,6 +62,12 @@ public class Runner : MonoBehaviour
                 roadLine++;
             }
         }
+    }
+
+    public void OnDeath()
+    {
+        animator.Play("Die");
+        AudioManager.instance.Sound(sound.clips[0]);
     }
 
     public void Status(RoadLine roadLine)
@@ -83,26 +88,11 @@ public class Runner : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        IItem item = other.GetComponent<IItem>();
+        CollisionObject collisionObject = other.GetComponent<CollisionObject>();
 
-        if(item != null)
-        {            
-            item.Use(this);
-
-            if (other.GetComponentInChildren<MeshRenderer>() != null)
-            {
-                other.GetComponentInChildren<MeshRenderer>().enabled = false;
-            }
-        }
-
-        if(other.CompareTag("Obstacle"))
+        if(collisionObject != null)
         {
-            Death();
+            collisionObject.Activate(this);
         }
-    }
-
-    private void Death()
-    {
-        animator.Play("Die");
     }
 }
