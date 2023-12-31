@@ -7,24 +7,20 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] public float sequence = 1f;
     [SerializeField] public float limitVelocity = 50;
 
-    void Start()
+    public void Init()
     {
-        Initialize();
-    }
-
-    public void Initialize()
-    {
+        speed = 20;
         Time.timeScale = 1.0f;
+        DataManager.instance.Score = 0;
     }
 
     public void GameOver()
     {
-        Time.timeScale = 0.0f;        
-    }
+        Time.timeScale = 0.0f;
 
-    public void Resume()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        DataManager.instance.SetRankScore(DataManager.instance.Score);
+
+        Instantiate(Resources.Load<GameObject>("Game Over Panel"), GameObject.Find("UI Canvas").transform);
     }
 
     public void IncreaseVelocity()
@@ -33,5 +29,21 @@ public class GameManager : Singleton<GameManager>
         {
             speed += sequence;
         }
+    }
+
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Init();
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

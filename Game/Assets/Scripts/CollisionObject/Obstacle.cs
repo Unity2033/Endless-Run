@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Obstacle : CollisionObject, IObstacleCollision
@@ -22,8 +22,19 @@ public class Obstacle : CollisionObject, IObstacleCollision
     public void Activate(GameObject obstacle)
     {
         Obstacle other = obstacle.GetComponent<Obstacle>();
-        
-        speed = other.speed;
+
+        speed = other.speed;  
+    }
+
+    public override void Activate(Runner runner)
+    {
+        runner.OnDeath();
+
+        gameObject.GetComponent<AudioSource>().mute = true;
+
+        Instantiate(Resources.Load<GameObject>("Death Screen"), GameObject.Find("UI Canvas").transform);
+
+        GameManager.instance.GameOver();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,19 +42,8 @@ public class Obstacle : CollisionObject, IObstacleCollision
         IObstacleCollision obstacleCollision = other.GetComponent<IObstacleCollision>();
 
         if (obstacleCollision != null)
-        {
+        {        
             obstacleCollision.Activate(gameObject);
         }
-    }
-
-    public override void Activate(Runner runner)
-    {
-        // runner.OnDeath();
-        // 
-        // gameObject.GetComponent<AudioSource>().mute = true;
-        // 
-        // Instantiate(Resources.Load<GameObject>("Death Screen"), GameObject.Find("UI Canvas").transform);
-        // 
-        // GameManager.instance.GameOver();
     }
 }

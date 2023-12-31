@@ -1343,7 +1343,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4654660054577939174}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 73c7ffb27994f004abc0b801ca7f7876, type: 3}
   m_Controller: {fileID: 9100000, guid: 3b9c3b59dd4d3714a8e8ed9f96b97e53, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 2
@@ -1370,9 +1370,13 @@ MonoBehaviour:
   animator: {fileID: 0}
   roadLine: 0
   positionX: 4
+  detectorPositionX: 2.25
   sound:
     clips:
     - {fileID: 8300000, guid: bdf81dba354b85a4fb3bc8511d8070a8, type: 3}
+  leftDetector: {fileID: 0}
+  rightDetector: {fileID: 0}
+  particleSystem: {fileID: 0}
 --- !u!1 &4693435954453114049
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Events;
 
 public enum RoadLine
 {
@@ -17,9 +15,13 @@ public class Runner : MonoBehaviour
 
     [SerializeField] RoadLine roadLine;
     [SerializeField] float positionX = 4f;
+    [SerializeField] float detectorPositionX = 2.25f;
 
     [SerializeField] Sound sound = new Sound();
 
+    [SerializeField] LeftDetector leftDetector;
+    [SerializeField] RightDetector rightDetector;
+    [SerializeField] ParticleSystem particleSystem;
 
     void Start()
     {
@@ -41,6 +43,11 @@ public class Runner : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            if (leftDetector.Detector)
+            {
+                return;
+            }
+
             if (roadLine == RoadLine.LEFT)
             {
                 roadLine = RoadLine.LEFT;
@@ -53,6 +60,11 @@ public class Runner : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
+            if (rightDetector.Detector)
+            {
+                return;
+            }
+
             if (roadLine == RoadLine.RIGHT)
             {
                 roadLine = RoadLine.RIGHT;
@@ -76,15 +88,27 @@ public class Runner : MonoBehaviour
         {
             case RoadLine.LEFT:
                 transform.position = new Vector3(-positionX, 0, 0);
+                leftDetector.transform.position = new Vector3(-positionX + -detectorPositionX, 0, 0);
+                rightDetector.transform.position = new Vector3(-positionX + detectorPositionX, 0, 0);
                 break;
             case RoadLine.MIDDLE:
                 transform.position = new Vector3(0, 0, 0);
+                leftDetector.transform.position = new Vector3(-detectorPositionX, 0, 0);
+                rightDetector.transform.position = new Vector3(detectorPositionX, 0, 0);
                 break;
             case RoadLine.RIGHT:
-                transform.position = new Vector3(positionX, 0, 0);                
+                transform.position = new Vector3(positionX, 0, 0);
+                leftDetector.transform.position = new Vector3(positionX + -detectorPositionX, 0, 0);
+                rightDetector.transform.position = new Vector3(positionX + detectorPositionX, 0, 0);
                 break;
         }
     }
+
+    public void ScoreEffect()
+    {
+        particleSystem.Play();
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {

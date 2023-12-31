@@ -18,6 +18,7 @@ public class CoroutineCache : MonoBehaviour
     }
 
     private static readonly Dictionary<float, WaitForSeconds> timeInterval = new Dictionary<float, WaitForSeconds>(new FloatCompare());
+    private static readonly Dictionary<float, WaitForSecondsRealtime> realTimeInterval = new Dictionary<float, WaitForSecondsRealtime>(new FloatCompare());
 
     public static WaitForSeconds waitForSeconds(float time)
     {
@@ -26,6 +27,18 @@ public class CoroutineCache : MonoBehaviour
         if (timeInterval.TryGetValue(time, out waitForSeconds) == false)
         {
             timeInterval.Add(time, waitForSeconds = new WaitForSeconds(time));
+        }
+
+        return waitForSeconds;
+    }
+
+    public static WaitForSecondsRealtime WaitForSecondsRealtime(float time)
+    {
+        WaitForSecondsRealtime waitForSeconds;
+
+        if (realTimeInterval.TryGetValue(time, out waitForSeconds) == false)
+        {
+            realTimeInterval.Add(time, waitForSeconds = new WaitForSecondsRealtime(time));
         }
 
         return waitForSeconds;

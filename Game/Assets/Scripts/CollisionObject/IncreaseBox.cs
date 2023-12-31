@@ -5,6 +5,10 @@ using UnityEngine;
 public class IncreaseBox : CollisionObject
 {
     [SerializeField] float initVelocity;
+    public void Start()
+    {
+        initVelocity = GameManager.instance.speed;
+    }
 
     public override void Activate(Runner runner)
     {
@@ -12,10 +16,5 @@ public class IncreaseBox : CollisionObject
 
         RoadManager.roadCallBack();
         GameManager.instance.IncreaseVelocity();
-    }
-
-    public void Start()
-    {
-        initVelocity = GameManager.instance.speed;
     }
 }
