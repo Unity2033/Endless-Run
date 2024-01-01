@@ -13,9 +13,9 @@ public class LeftDetector : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        IObstacleCollision obstacleCollision = other.GetComponent<IObstacleCollision>();
+        Obstacle obstacle = other.GetComponent<Obstacle>();
 
-        if (obstacleCollision != null)
+        if (obstacle != null)
         {
             detector = true;
         }
@@ -23,9 +23,9 @@ public class LeftDetector : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        IObstacleCollision obstacleCollision = other.GetComponent<IObstacleCollision>();
+        Obstacle obstacle = other.GetComponent<Obstacle>();
 
-        if (obstacleCollision != null)
+        if (obstacle != null)
         {
             detector = false;
         }

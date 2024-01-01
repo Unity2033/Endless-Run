@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum RoadLine
@@ -14,6 +15,7 @@ public class Runner : MonoBehaviour
     public Animator animator;
 
     [SerializeField] RoadLine roadLine;
+    [SerializeField] float speed = 25.0f;
     [SerializeField] float positionX = 4f;
     [SerializeField] float detectorPositionX = 2.25f;
 
@@ -31,8 +33,7 @@ public class Runner : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale == 0) 
-            return;
+        if (GameManager.instance.state == false) return;
 
         Move();
 
@@ -55,8 +56,10 @@ public class Runner : MonoBehaviour
             else 
             {
                 roadLine--; 
+                animator.Play("Left Avoid");
             }
         }
+
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
@@ -72,36 +75,36 @@ public class Runner : MonoBehaviour
             else 
             {
                 roadLine++;
+                animator.Play("Right Avoid");
             }
         }
     }
 
     public void OnDeath()
     {
-        animator.Play("Die");
+        animator.SetTrigger("Death");
         AudioManager.instance.Sound(sound.clips[0]);
+        Instantiate(Resources.Load<GameObject>("Death Screen"), GameObject.Find("UI Canvas").transform);
     }
 
     public void Status(RoadLine roadLine)
     {
         switch (roadLine)
         {
-            case RoadLine.LEFT:
-                transform.position = new Vector3(-positionX, 0, 0);
-                leftDetector.transform.position = new Vector3(-positionX + -detectorPositionX, 0, 0);
-                rightDetector.transform.position = new Vector3(-positionX + detectorPositionX, 0, 0);
+            case RoadLine.LEFT : SmoothMovement(-positionX);
                 break;
-            case RoadLine.MIDDLE:
-                transform.position = new Vector3(0, 0, 0);
-                leftDetector.transform.position = new Vector3(-detectorPositionX, 0, 0);
-                rightDetector.transform.position = new Vector3(detectorPositionX, 0, 0);
+            case RoadLine.MIDDLE : SmoothMovement(0);
                 break;
-            case RoadLine.RIGHT:
-                transform.position = new Vector3(positionX, 0, 0);
-                leftDetector.transform.position = new Vector3(positionX + -detectorPositionX, 0, 0);
-                rightDetector.transform.position = new Vector3(positionX + detectorPositionX, 0, 0);
+            case RoadLine.RIGHT : SmoothMovement(positionX);
                 break;
         }
+    }
+
+    private void SmoothMovement(float x)
+    {
+        transform.position = Vector3.Lerp(transform.position, new Vector3(x, 0, 0), speed * Time.deltaTime);
+        leftDetector.transform.position =  new Vector3(x + -detectorPositionX, 0, 0);
+        rightDetector.transform.position =  new Vector3(x + detectorPositionX, 0, 0);
     }
 
     public void ScoreEffect()

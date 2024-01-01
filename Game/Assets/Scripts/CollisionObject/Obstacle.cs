@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Obstacle : CollisionObject, IObstacleCollision
+public class Obstacle : CollisionObject
 {
     [SerializeField] float speed;
     [SerializeField] Vector3 direction;
@@ -11,19 +11,14 @@ public class Obstacle : CollisionObject, IObstacleCollision
     private void OnEnable()
     {
         direction = Vector3.forward;
-        speed = GameManager.instance.speed + Random.Range(5, 25);
+        speed = GameManager.instance.speed;
     }
 
     void Update()
     {
+        if (GameManager.instance.state == false) return;
+
         transform.Translate(direction * speed * Time.deltaTime);
-    }
-
-    public void Activate(GameObject obstacle)
-    {
-        Obstacle other = obstacle.GetComponent<Obstacle>();
-
-        speed = other.speed;  
     }
 
     public override void Activate(Runner runner)
@@ -32,18 +27,6 @@ public class Obstacle : CollisionObject, IObstacleCollision
 
         gameObject.GetComponent<AudioSource>().mute = true;
 
-        Instantiate(Resources.Load<GameObject>("Death Screen"), GameObject.Find("UI Canvas").transform);
-
         GameManager.instance.GameOver();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        IObstacleCollision obstacleCollision = other.GetComponent<IObstacleCollision>();
-
-        if (obstacleCollision != null)
-        {        
-            obstacleCollision.Activate(gameObject);
-        }
     }
 }

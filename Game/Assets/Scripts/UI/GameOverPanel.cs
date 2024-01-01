@@ -21,7 +21,7 @@ public class GameOverPanel : MonoBehaviour
     {
         for (int i = 0; i < scoreList.Count; i++)
         {
-            scoreList[i].text = DataManager.instance.GetRankScore(i).ToString();
+            scoreList[i].text = DataManager.instance.GetRankScore(i).ToString() +"m";
         };
     }
 

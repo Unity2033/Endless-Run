@@ -20,6 +20,8 @@ public class RoadManager : MonoBehaviour
   
     void Update()
     {
+        if (GameManager.instance.state == false) return;
+
         for (int i = 0; i < roads.Count; i++)
         {
             roads[i].transform.Translate(Vector3.back * GameManager.instance.speed * Time.deltaTime);

@@ -29,7 +29,7 @@ public class TransitionManager : Singleton<TransitionManager>
 
             sceneImage.color = color;
 
-            yield return CoroutineCache.WaitForSecondsRealtime(Time.unscaledDeltaTime);
+            yield return null;
         }
 
         sceneImage.gameObject.SetActive(false);
@@ -65,7 +65,7 @@ public class TransitionManager : Singleton<TransitionManager>
                 }
             }
 
-            yield return CoroutineCache.WaitForSecondsRealtime(Time.unscaledDeltaTime);
+            yield return null;
         }
     }
 

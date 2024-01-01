@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class DisableZone : MonoBehaviour, IObstacleCollision
+public class DisableZone : MonoBehaviour
 {
-    public void Activate(GameObject obstacle)
+    private void OnTriggerEnter(Collider other)
     {
-        obstacle.SetActive(false);
+        Obstacle obstacle = other.GetComponent<Obstacle>();
+
+        if (obstacle != null)
+        {
+            obstacle.gameObject.SetActive(false);
+        }
     }
 }

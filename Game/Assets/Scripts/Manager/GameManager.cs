@@ -3,20 +3,22 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] float sequence = 1f;
+    [SerializeField] float limitVelocity = 50;
+
+    [SerializeField] public bool state = true; 
     [SerializeField] public float speed = 20f;
-    [SerializeField] public float sequence = 1f;
-    [SerializeField] public float limitVelocity = 50;
 
     public void Init()
     {
         speed = 20;
-        Time.timeScale = 1.0f;
+        state = true;
         DataManager.instance.Score = 0;
     }
 
     public void GameOver()
     {
-        Time.timeScale = 0.0f;
+        state = false;
 
         DataManager.instance.SetRankScore(DataManager.instance.Score);
 

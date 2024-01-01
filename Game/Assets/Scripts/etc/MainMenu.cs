@@ -10,12 +10,16 @@ public class MainMenu : MonoBehaviour
 {
     public void NewGame()
     {
+        Animator animator = GameObject.Find("Runner").GetComponent<Animator>();
+
+        animator.SetTrigger("Start");
+
         StartCoroutine(TransitionManager.instance.AsyncLoad(SceneID.GAME));
     }
 
     public void Shop()
     {    
-        Debug.Log("B");
+       
     }
 
     public void Option()
