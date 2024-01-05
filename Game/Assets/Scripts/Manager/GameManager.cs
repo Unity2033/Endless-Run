@@ -13,6 +13,7 @@ public class GameManager : Singleton<GameManager>
     {
         speed = 20;
         state = true;
+        Time.timeScale = 1.0f;
         DataManager.instance.Score = 0;
     }
 

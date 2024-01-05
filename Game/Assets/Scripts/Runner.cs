@@ -25,23 +25,19 @@ public class Runner : MonoBehaviour
     [SerializeField] RightDetector rightDetector;
     [SerializeField] ParticleSystem particleSystem;
 
+    private void OnEnable()
+    {
+        InputManager.instance.keyAction += Move;
+    }
+
     void Start()
     {
         roadLine = RoadLine.MIDDLE;
         animator = GetComponent<Animator>();
     }
 
-    void Update()
-    {
-        if (GameManager.instance.state == false) return;
-
-        Move();
-
-        Status(roadLine);        
-    }
-
     public void Move()
-    {
+    {   
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             if (leftDetector.Detector)
@@ -78,13 +74,14 @@ public class Runner : MonoBehaviour
                 animator.Play("Right Avoid");
             }
         }
+
+        Status(roadLine);
     }
 
     public void OnDeath()
     {
         animator.SetTrigger("Death");
         AudioManager.instance.Sound(sound.clips[0]);
-        Instantiate(Resources.Load<GameObject>("Death Screen"), GameObject.Find("UI Canvas").transform);
     }
 
     public void Status(RoadLine roadLine)
@@ -112,6 +109,10 @@ public class Runner : MonoBehaviour
         particleSystem.Play();
     }
 
+    private void OnDisable()
+    {
+        InputManager.instance.keyAction -= Move;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

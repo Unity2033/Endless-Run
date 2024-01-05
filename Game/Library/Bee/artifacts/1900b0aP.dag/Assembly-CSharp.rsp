@@ -105,6 +105,7 @@
 -define:ENABLE_TERRAIN
 -define:ENABLE_TILEMAP
 -define:ENABLE_TIMELINE
+-define:ENABLE_INPUT_SYSTEM
 -define:ENABLE_LEGACY_INPUT_MANAGER
 -define:TEXTCORE_FONT_ENGINE_1_5_OR_NEWER
 -define:CSHARP_7_OR_LATER
@@ -301,6 +302,8 @@
 -r:"Library/PackageCache/com.unity.visualscripting@1.9.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/Cinemachine.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.AI.Navigation.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aP.dag/Unity.InputSystem.ForUI.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aP.dag/Unity.InputSystem.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.TextMeshPro.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.Timeline.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.VisualScripting.Core.ref.dll"
@@ -319,18 +322,18 @@
 "Assets/Scripts/etc/CoroutineCache.cs"
 "Assets/Scripts/etc/MainMenu.cs"
 "Assets/Scripts/etc/Sound.cs"
-"Assets/Scripts/Items/Item.cs"
 "Assets/Scripts/Manager/AudioManager.cs"
 "Assets/Scripts/Manager/CoinManager.cs"
 "Assets/Scripts/Manager/DataManager.cs"
 "Assets/Scripts/Manager/GameManager.cs"
-"Assets/Scripts/Manager/InterfaceManager.cs"
 "Assets/Scripts/Manager/ObstacleManager.cs"
 "Assets/Scripts/Manager/RoadManager.cs"
 "Assets/Scripts/Manager/TransitionManager.cs"
 "Assets/Scripts/Runner.cs"
 "Assets/Scripts/Singleton.cs"
 "Assets/Scripts/UI/GameOverPanel.cs"
+"Assets/Scripts/UI/PausePanel.cs"
+"Assets/Scripts/UI/PauseUI.cs"
 "Assets/Scripts/UI/ScoreUI.cs"
 -langversion:9.0
 

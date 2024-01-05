@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ public class TransitionManager : Singleton<TransitionManager>
 {
     [SerializeField] float time;
     [SerializeField] Image sceneImage;
+    [SerializeField] Sound sound = new Sound();
 
     public IEnumerator FadeIn()
     {
@@ -37,6 +39,8 @@ public class TransitionManager : Singleton<TransitionManager>
 
     public IEnumerator AsyncLoad(SceneID sceneID)
     {
+        AudioManager.instance.Sound(sound.clips[0]);
+
         sceneImage.gameObject.SetActive(true);
 
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync((int)sceneID);

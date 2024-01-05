@@ -21,6 +21,17 @@ public class AudioManager : Singleton<AudioManager>
         effectSource.PlayOneShot(clip);
     }
 
+    public void Mute(string sourceName, bool flag)
+    {
+        switch(sourceName)
+        {
+            case "Scenery" : scenerySource.mute = flag;
+                break;
+            case "Effect": effectSource.mute = flag;
+                break;
+        }
+    }
+
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -33,7 +44,6 @@ public class AudioManager : Singleton<AudioManager>
         scenerySource.clip = Resources.Load<AudioClip>(sceneSound.ToString());
 
         scenerySource.Play();
-
     }
 
     void OnDisable()

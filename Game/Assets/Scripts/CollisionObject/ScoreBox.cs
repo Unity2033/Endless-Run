@@ -17,6 +17,8 @@ public class ScoreBox : CollisionObject
 
     private void Update()
     {
+        if (GameManager.instance.state == false) return;
+
         transform.Translate(Vector3.back * GameManager.instance.speed * Time.deltaTime);
     }
 

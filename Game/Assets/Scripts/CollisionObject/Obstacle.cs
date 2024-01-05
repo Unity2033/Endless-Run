@@ -6,11 +6,14 @@ using UnityEngine;
 public class Obstacle : CollisionObject
 {
     [SerializeField] float speed;
+    [SerializeField] float increaseSpeed;
+
     [SerializeField] Vector3 direction;
 
     private void OnEnable()
     {
         direction = Vector3.forward;
+
         speed = GameManager.instance.speed;
     }
 
