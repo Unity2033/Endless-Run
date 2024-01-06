@@ -51,7 +51,7 @@ public class ObstacleManager : MonoBehaviour
 
     IEnumerator ActiveObstacle()
     {
-        while (true) 
+        while (GameManager.instance.state) 
         {
             for (int i = 0; i < Random.Range(1, createCount); i++)
             {

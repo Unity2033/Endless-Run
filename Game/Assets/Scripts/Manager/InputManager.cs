@@ -9,11 +9,6 @@ public class InputManager : Singleton<InputManager>
 
     private void Update()
     {
-        if (GameManager.instance.state == false)
-        {
-            return;
-        }
-
         if (Input.anyKey == false)
         {
             return;

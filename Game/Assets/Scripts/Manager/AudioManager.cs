@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public enum SceneSound
 {
     Title,
-    Game
+    Game,
+    Shop
 }
 
 public class AudioManager : Singleton<AudioManager>
@@ -43,6 +44,7 @@ public class AudioManager : Singleton<AudioManager>
 
         scenerySource.clip = Resources.Load<AudioClip>(sceneSound.ToString());
 
+        scenerySource.loop = true;
         scenerySource.Play();
     }
 

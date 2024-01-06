@@ -23,7 +23,7 @@ public class GameManager : Singleton<GameManager>
 
         DataManager.instance.SetRankScore(DataManager.instance.Score);
 
-        Instantiate(Resources.Load<GameObject>("Game Over Panel"), GameObject.Find("UI Canvas").transform);
+        ResourceManager.instance.Instance("Game Over Panel", GameObject.Find("UI Canvas").transform);
     }
 
     public void IncreaseVelocity()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class IncreaseBox : CollisionObject
 {
     [SerializeField] float initVelocity;
+
     public void Start()
     {
         initVelocity = GameManager.instance.speed;

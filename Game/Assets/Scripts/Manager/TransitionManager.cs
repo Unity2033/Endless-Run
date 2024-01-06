@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public enum SceneID
 { 
    TITLE,
-   GAME
+   GAME,
+   SHOP
 }
 
 public class TransitionManager : Singleton<TransitionManager>
@@ -19,11 +20,11 @@ public class TransitionManager : Singleton<TransitionManager>
 
     public IEnumerator FadeIn()
     {
-        sceneImage.gameObject.SetActive(true);
-
         Color color = sceneImage.color;
 
         color.a = 1;
+
+        sceneImage.gameObject.SetActive(true);
 
         while (color.a >= 0.0f)
         {

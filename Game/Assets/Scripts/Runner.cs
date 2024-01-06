@@ -36,8 +36,18 @@ public class Runner : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        Status(roadLine);
+    }
+
     public void Move()
-    {   
+    {
+        if (GameManager.instance.state == false)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             if (leftDetector.Detector)
@@ -74,8 +84,6 @@ public class Runner : MonoBehaviour
                 animator.Play("Right Avoid");
             }
         }
-
-        Status(roadLine);
     }
 
     public void OnDeath()

@@ -353,6 +353,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3963ede97336394f9de27a45ea7bad1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound:
+    clips:
+    - {fileID: 8300000, guid: a1c884a3d6f75534da7d85c52b01a012, type: 3}
 --- !u!1 &2451341267372661021
 GameObject:
   m_ObjectHideFlags: 0
@@ -795,9 +798,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: GameOverPanel, Assembly-CSharp
-        m_MethodName: Resume
+      - m_Target: {fileID: 4793950080624971510}
+        m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
+        m_MethodName: Setting
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

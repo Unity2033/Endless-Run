@@ -14,7 +14,9 @@ public class Obstacle : CollisionObject
     {
         direction = Vector3.forward;
 
-        speed = GameManager.instance.speed;
+        increaseSpeed += 5;
+
+        speed = GameManager.instance.speed + increaseSpeed;
     }
 
     void Update()

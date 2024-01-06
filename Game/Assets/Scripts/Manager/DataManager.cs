@@ -49,4 +49,9 @@ public class DataManager : Singleton<DataManager>
     {
         return PlayerPrefs.GetInt("Rank Score " + i.ToString());      
     }
+
+    public void DeleteData()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }
