@@ -393,6 +393,7 @@ MonoBehaviour:
   compare: 0
   createCount: 0
   randomPosition: 0
+  levelDesign: 1
 --- !u!4 &394051341 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5463847133409040476, guid: 2366d6dc4a4e0224d861c7ab9f4d97a6, type: 3}
@@ -2251,6 +2252,10 @@ PrefabInstance:
     - target: {fileID: 4654660054577939174, guid: 2366d6dc4a4e0224d861c7ab9f4d97a6, type: 3}
       propertyPath: m_Name
       value: Runner
+      objectReference: {fileID: 0}
+    - target: {fileID: 5129581515707247746, guid: 2366d6dc4a4e0224d861c7ab9f4d97a6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5463847133409040476, guid: 2366d6dc4a4e0224d861c7ab9f4d97a6, type: 3}
       propertyPath: m_LocalPosition.x

@@ -6,17 +6,20 @@ using UnityEngine;
 public class Obstacle : CollisionObject
 {
     [SerializeField] float speed;
-    [SerializeField] float increaseSpeed;
 
     [SerializeField] Vector3 direction;
+
+    public float Speed
+    {
+        set { speed = value; }
+        get { return speed; }
+    }
 
     private void OnEnable()
     {
         direction = Vector3.forward;
 
-        increaseSpeed += 5;
-
-        speed = GameManager.instance.speed + increaseSpeed;
+        speed = GameManager.instance.speed + Random.Range(GameManager.instance.difficulty.MinimumEnableSpeed, GameManager.instance.difficulty.MaximumEnableSpeed);
     }
 
     void Update()
@@ -28,10 +31,10 @@ public class Obstacle : CollisionObject
 
     public override void Activate(Runner runner)
     {
-        runner.OnDeath();
+         runner.animator.SetTrigger("Death");
 
-        gameObject.GetComponent<AudioSource>().mute = true;
+         gameObject.GetComponent<AudioSource>().mute = true;
 
-        GameManager.instance.GameOver();
+         GameManager.instance.GameOver();
     }
 }

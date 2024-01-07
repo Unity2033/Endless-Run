@@ -16,6 +16,6 @@ public class IncreaseBox : CollisionObject
         runner.animator.speed = GameManager.instance.speed / initVelocity;
 
         RoadManager.roadCallBack();
-        GameManager.instance.IncreaseVelocity();
+        GameManager.instance.IncreaseSequence();
     }
 }

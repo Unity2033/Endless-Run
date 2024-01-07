@@ -8,7 +8,6 @@ public enum SceneSound
 {
     Title,
     Game,
-    Shop
 }
 
 public class AudioManager : Singleton<AudioManager>
@@ -17,20 +16,15 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] AudioSource effectSource;
     [SerializeField] AudioSource scenerySource;
 
+    public void Volume()
+    {
+        effectSource.volume = DataManager.instance.LoadEffectVolume();
+        scenerySource.volume = DataManager.instance.LoadSceneryVolume();
+    }
+
     public void Sound(AudioClip clip)
     {
         effectSource.PlayOneShot(clip);
-    }
-
-    public void Mute(string sourceName, bool flag)
-    {
-        switch(sourceName)
-        {
-            case "Scenery" : scenerySource.mute = flag;
-                break;
-            case "Effect": effectSource.mute = flag;
-                break;
-        }
     }
 
     void OnEnable()

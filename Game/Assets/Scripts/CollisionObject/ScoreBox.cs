@@ -28,7 +28,8 @@ public class ScoreBox : CollisionObject
 
         if (DataManager.instance.Score % 250 == 0)
         {
-            runner.ScoreEffect();
+            runner.ScoreEffect(); 
+            GameManager.instance.difficulty.ControlLevel();
         }
 
         scoreEvent.Invoke();

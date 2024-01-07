@@ -19,8 +19,6 @@ public class Runner : MonoBehaviour
     [SerializeField] float positionX = 4f;
     [SerializeField] float detectorPositionX = 2.25f;
 
-    [SerializeField] Sound sound = new Sound();
-
     [SerializeField] LeftDetector leftDetector;
     [SerializeField] RightDetector rightDetector;
     [SerializeField] ParticleSystem particleSystem;
@@ -84,12 +82,6 @@ public class Runner : MonoBehaviour
                 animator.Play("Right Avoid");
             }
         }
-    }
-
-    public void OnDeath()
-    {
-        animator.SetTrigger("Death");
-        AudioManager.instance.Sound(sound.clips[0]);
     }
 
     public void Status(RoadLine roadLine)

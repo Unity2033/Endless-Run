@@ -6,28 +6,31 @@ using UnityEngine.UI;
 
 public class OptionPanel : MonoBehaviour
 {
-    private bool effectSwitch = true;
-    private bool scenerySwitch = true;
+    [SerializeField] Slider effectSlider;
+    [SerializeField] Slider scenerySlider;
 
-    [SerializeField] Image effectToggleImage;
-    [SerializeField] Image sceneryToggleImage;
-
-    public void SceneryToggle()
+    public void Start()
     {
-        scenerySwitch = !scenerySwitch;
-
-        sceneryToggleImage.sprite = ResourceManager.instance.Load<Sprite>("Sound " + scenerySwitch);
-
-        AudioManager.instance.Mute("Scenery", !scenerySwitch);
+        effectSlider.value = DataManager.instance.LoadEffectVolume();
+        scenerySlider.value = DataManager.instance.LoadSceneryVolume();
     }
 
-    public void EffectToggle()
+    public void ControlSceneryVolume(float volume)
     {
-        effectSwitch = !effectSwitch;
-        
-        effectToggleImage.sprite = ResourceManager.instance.Load<Sprite>("Sound " + effectSwitch);
+        scenerySlider.value = volume;
 
-        AudioManager.instance.Mute("Effect", !effectSwitch);
+        DataManager.instance.SaveSceneryVolume(volume);
+
+        AudioManager.instance.Volume();
+    }
+
+    public void ControlEffectVolume(float volume)
+    {
+        effectSlider.value = volume;
+
+        DataManager.instance.SaveEffectVolume(volume);
+
+        AudioManager.instance.Volume();
     }
 
     public void Initialized()
