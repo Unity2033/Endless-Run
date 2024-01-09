@@ -8,6 +8,7 @@ public class Obstacle : CollisionObject
     [SerializeField] float speed;
 
     [SerializeField] Vector3 direction;
+    [SerializeField] Sound sound = new Sound();
 
     public float Speed
     {
@@ -31,10 +32,12 @@ public class Obstacle : CollisionObject
 
     public override void Activate(Runner runner)
     {
-         runner.animator.SetTrigger("Death");
+        runner.animator.Play("Die");
 
-         gameObject.GetComponent<AudioSource>().mute = true;
+        AudioManager.instance.Sound(sound.clips[0]);
 
-         GameManager.instance.GameOver();
+        gameObject.GetComponent<AudioSource>().mute = true;
+
+        GameManager.instance.GameOver();
     }
 }

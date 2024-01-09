@@ -139,6 +139,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   direction: {x: 0, y: 0, z: 0}
+  sound:
+    clips:
+    - {fileID: 8300000, guid: bdf81dba354b85a4fb3bc8511d8070a8, type: 3}
 --- !u!65 &5909107426373283635
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -170,7 +173,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: f15efa9499ba8f94ca0bd618952c4b70, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7bfa9ec10e925104094054829e1bbde2, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1

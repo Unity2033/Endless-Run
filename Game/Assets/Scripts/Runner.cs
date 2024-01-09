@@ -17,7 +17,6 @@ public class Runner : MonoBehaviour
     [SerializeField] RoadLine roadLine;
     [SerializeField] float speed = 25.0f;
     [SerializeField] float positionX = 4f;
-    [SerializeField] float detectorPositionX = 2.25f;
 
     [SerializeField] LeftDetector leftDetector;
     [SerializeField] RightDetector rightDetector;
@@ -100,8 +99,6 @@ public class Runner : MonoBehaviour
     private void SmoothMovement(float x)
     {
         transform.position = Vector3.Lerp(transform.position, new Vector3(x, 0, 0), speed * Time.deltaTime);
-        leftDetector.transform.position =  new Vector3(x + -detectorPositionX, 0, 0);
-        rightDetector.transform.position =  new Vector3(x + detectorPositionX, 0, 0);
     }
 
     public void ScoreEffect()

@@ -25,6 +25,7 @@ public class ScoreBox : CollisionObject
     public override void Activate(Runner runner)
     {
         DataManager.instance.Score += increaseScore;
+        DataManager.instance.QuestScore += increaseScore;
 
         if (DataManager.instance.Score % 250 == 0)
         {

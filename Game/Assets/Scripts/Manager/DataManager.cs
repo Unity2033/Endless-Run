@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
 {
-    private int score = 0;
-    private List<int> rankScore = new List<int>();
-
-    private float sceneryVolume = 1.0f;
     private float effectVolume = 1.0f;
+    private float sceneryVolume = 1.0f;
+
+    private int score = 0;
+    private int questScore;
+    private List<int> rankScore = new List<int>();
 
     private void Start()
     {
@@ -23,7 +24,28 @@ public class DataManager : Singleton<DataManager>
     public int Score 
     {
         get { return score; }
-        set { score = value; }
+
+        set 
+        {
+            score = value;
+        }
+    }
+
+    public int QuestScore
+    {
+        get 
+        {
+            questScore = PlayerPrefs.GetInt("Quest Score");
+
+            return questScore;  
+        }
+
+        set
+        {
+            questScore = value;
+
+            PlayerPrefs.SetInt("Quest Score", questScore);
+        }
     }
 
     public void SetRankScore(int currentScore)
