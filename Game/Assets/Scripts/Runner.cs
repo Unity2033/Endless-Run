@@ -52,13 +52,9 @@ public class Runner : MonoBehaviour
                 return;
             }
 
-            if (roadLine == RoadLine.LEFT)
+            if (roadLine > RoadLine.LEFT)
             {
-                roadLine = RoadLine.LEFT;
-            }
-            else 
-            {
-                roadLine--; 
+                roadLine--;
                 animator.Play("Left Avoid");
             }
         }
@@ -71,11 +67,7 @@ public class Runner : MonoBehaviour
                 return;
             }
 
-            if (roadLine == RoadLine.RIGHT)
-            {
-                roadLine = RoadLine.RIGHT;
-            }
-            else 
+            if (roadLine < RoadLine.RIGHT)
             {
                 roadLine++;
                 animator.Play("Right Avoid");

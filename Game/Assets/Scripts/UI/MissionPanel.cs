@@ -9,8 +9,15 @@ public class MissionPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log(DataManager.instance.QuestScore);
-        currentNumber.text = DataManager.instance.QuestScore.ToString() + "m" + " / " + "100000m";
+        if (DataManager.instance.QuestScore < 100000)
+        {
+            currentNumber.text = DataManager.instance.QuestScore.ToString() + "m" + " / " + "100000m";
+        }
+        else
+        {
+            currentNumber.color = Color.green;
+            currentNumber.text = "Completed";
+        }
     }
 
     public void Exit()
