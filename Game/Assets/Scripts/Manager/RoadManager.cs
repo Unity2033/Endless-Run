@@ -9,12 +9,9 @@ public class RoadManager : MonoBehaviour
     
     [SerializeField] float offset = 40.0f;
 
-    public static Action roadCallBack;
-
     public void Start()
     {
         roads.Capacity = 10;
-        roadCallBack = NewPosition;
     }
   
     void Update()

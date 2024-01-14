@@ -7,22 +7,30 @@ using UnityEngine.UI;
 
 public class GameOverPanel : MonoBehaviour
 {
+    [SerializeField] Text bestScoreText;
+    [SerializeField] Text challengeText;
     [SerializeField] Button resumeButton;
-    [SerializeField] List<TextMeshProUGUI> scoreList;
 
     public void Start()
     {
-        scoreList.Capacity = 5;
+        if (DataManager.instance.BestScore < DataManager.instance.Score)
+        {
+            challengeText.text = "Success";
+            challengeText.color = Color.green;
+            DataManager.instance.BestScore = DataManager.instance.Score;
+        }
+        else
+        {
+            challengeText.text = "Failure";
+            challengeText.color = Color.white;
+        }
 
         RenewalRank();
     }
 
     public void RenewalRank()
     {
-        for (int i = 0; i < scoreList.Count; i++)
-        {
-            scoreList[i].text = DataManager.instance.GetRankScore(i).ToString() +"m";
-        };
+        bestScoreText.text = DataManager.instance.BestScore.ToString() +"m";
     }
 
     public void Resume()

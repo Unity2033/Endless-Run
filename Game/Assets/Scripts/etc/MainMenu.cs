@@ -3,10 +3,12 @@ using UnityEngine;
 public class MainMenu : MonoBehaviour
 {
     GameObject missionPanel;
+    [SerializeField] Animator animator;
     [SerializeField] Sound sound = new Sound();
 
     public void Execute()
     {
+        animator.SetTrigger("Start");
         StartCoroutine(TransitionManager.instance.AsyncLoad(SceneID.GAME));
     }
 

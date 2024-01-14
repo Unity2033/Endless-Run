@@ -20,7 +20,6 @@ public class Runner : MonoBehaviour
 
     [SerializeField] LeftDetector leftDetector;
     [SerializeField] RightDetector rightDetector;
-    [SerializeField] ParticleSystem particleSystem;
 
     private void OnEnable()
     {
@@ -91,11 +90,6 @@ public class Runner : MonoBehaviour
     private void SmoothMovement(float x)
     {
         transform.position = Vector3.Lerp(transform.position, new Vector3(x, 0, 0), speed * Time.deltaTime);
-    }
-
-    public void ScoreEffect()
-    {
-        particleSystem.Play();
     }
 
     private void OnDisable()

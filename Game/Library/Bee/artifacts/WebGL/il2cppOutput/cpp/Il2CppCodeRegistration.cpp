@@ -105,16 +105,16 @@ const Il2CppCodeRegistration g_CodeRegistration =
 {
 	2,
 	g_ReversePInvokeWrapperPointers,
-	2880,
+	40123,
 	g_Il2CppGenericMethodPointers,
 	g_Il2CppGenericAdjustorThunks,
-	4053,
+	8762,
 	g_Il2CppInvokerPointers,
-	425,
+	1756,
 	g_UnresolvedVirtualMethodPointers,
 	g_UnresolvedInstanceMethodPointers,
 	g_UnresolvedStaticMethodPointers,
-	469,
+	477,
 	g_Il2CppInteropData,
 	0,
 	NULL,
@@ -125,8 +125,8 @@ IL2CPP_EXTERN_C_CONST Il2CppMetadataRegistration g_MetadataRegistration;
 static const Il2CppCodeGenOptions s_Il2CppCodeGenOptions = 
 {
 	true,
-	0,
-	0,
+	7,
+	1,
 };
 void s_Il2CppCodegenRegistration()
 {

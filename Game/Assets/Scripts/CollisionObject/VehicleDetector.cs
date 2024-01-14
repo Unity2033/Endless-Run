@@ -10,8 +10,6 @@ public class VehicleDetector : MonoBehaviour
 
         if(obstacle != null)
         {
-            Debug.Log("³É");
-
             obstacle.GetComponent<Obstacle>().Speed = transform.parent.GetComponent<Obstacle>().Speed;
         }
     }

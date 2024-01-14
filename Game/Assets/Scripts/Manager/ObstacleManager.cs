@@ -96,7 +96,7 @@ public class ObstacleManager : MonoBehaviour
                 obstacleList[random].SetActive(true);
             }
 
-            yield return CoroutineCache.waitForSeconds(Random.Range(GameManager.instance.difficulty.MinimumSpawn, GameManager.instance.difficulty.MaximumSpawn));
+            yield return CoroutineCache.waitForSeconds(Random.Range(LevelManager.minimumSpawn, LevelManager.maximumSpawn));
         }
     }
 }

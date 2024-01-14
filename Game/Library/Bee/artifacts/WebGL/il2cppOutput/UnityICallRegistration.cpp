@@ -2410,10 +2410,6 @@ void RegisterAllStrippedInternalCalls()
 		void Register_UnityEngine_ParticleSystem_Emit_Internal();
 		Register_UnityEngine_ParticleSystem_Emit_Internal();
 
-		//System.Void UnityEngine.ParticleSystem::Play(System.Boolean)
-		void Register_UnityEngine_ParticleSystem_Play();
-		Register_UnityEngine_ParticleSystem_Play();
-
 	//End Registrations for type : UnityEngine.ParticleSystem
 
 	//Start Registrations for type : UnityEngine.ParticleSystemRenderer
@@ -3071,14 +3067,6 @@ void RegisterAllStrippedInternalCalls()
 		Register_UnityEngine_Rendering_SortingGroup_GetSortingGroupByIndex();
 
 	//End Registrations for type : UnityEngine.Rendering.SortingGroup
-
-	//Start Registrations for type : UnityEngine.RenderSettings
-
-		//UnityEngine.Material UnityEngine.RenderSettings::get_skybox()
-		void Register_UnityEngine_RenderSettings_get_skybox();
-		Register_UnityEngine_RenderSettings_get_skybox();
-
-	//End Registrations for type : UnityEngine.RenderSettings
 
 	//Start Registrations for type : UnityEngine.RenderTexture
 

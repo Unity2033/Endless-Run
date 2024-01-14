@@ -8,18 +8,8 @@ public class DataManager : Singleton<DataManager>
     private float sceneryVolume = 1.0f;
 
     private int score = 0;
+    private int bestScore;
     private int questScore;
-    private List<int> rankScore = new List<int>();
-
-    private void Start()
-    {
-        rankScore.Capacity = 5; 
-
-        for(int i = 0; i < 3; i++)
-        {
-            rankScore.Add(0);
-        }
-    }
 
     public int Score 
     {
@@ -48,31 +38,21 @@ public class DataManager : Singleton<DataManager>
         }
     }
 
-    public void SetRankScore(int currentScore)
+    public int BestScore
     {
-        for (int i = 0; i < rankScore.Count; i++)
+        get
         {
-            rankScore[i] = PlayerPrefs.GetInt("Rank Score " + i);
+            bestScore = PlayerPrefs.GetInt("Best Score");
+
+            return bestScore;
         }
 
-        if (rankScore[rankScore.Count-1] < currentScore)
+        set
         {
-            rankScore[rankScore.Count - 1] = currentScore;
-            PlayerPrefs.SetInt("Rank Score " + rankScore[rankScore.Count - 1], rankScore[rankScore.Count - 1]);      
-        }
-        
-        rankScore.Sort();
-        rankScore.Reverse();
+            bestScore = value;
 
-        for (int i = 0; i < rankScore.Count; i++)
-        {
-            PlayerPrefs.SetInt("Rank Score " + i, rankScore[i]);
+            PlayerPrefs.SetInt("Best Score", bestScore);
         }
-    }
-
-    public int GetRankScore(int i)
-    {
-        return PlayerPrefs.GetInt("Rank Score " + i.ToString());      
     }
 
     public void DeleteData()

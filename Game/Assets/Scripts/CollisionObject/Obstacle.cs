@@ -20,7 +20,7 @@ public class Obstacle : CollisionObject
     {
         direction = Vector3.forward;
 
-        speed = GameManager.instance.speed + Random.Range(GameManager.instance.difficulty.MinimumEnableSpeed, GameManager.instance.difficulty.MaximumEnableSpeed);
+        speed = GameManager.instance.speed + Random.Range(10, 20);
     }
 
     void Update()

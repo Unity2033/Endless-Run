@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class IncreaseBox : CollisionObject
 {
     [SerializeField] float initVelocity;
+    [SerializeField] UnityEvent callback;
 
     public void Start()
     {
@@ -15,7 +17,8 @@ public class IncreaseBox : CollisionObject
     {
         runner.animator.speed = GameManager.instance.speed / initVelocity;
 
-        RoadManager.roadCallBack();
+        callback.Invoke();
+
         GameManager.instance.IncreaseSequence();
     }
 }
