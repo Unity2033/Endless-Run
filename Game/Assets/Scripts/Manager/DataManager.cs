@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class DataManager : Singleton<DataManager>
 {
-    private float effectVolume = 1.0f;
-    private float sceneryVolume = 1.0f;
-
     private int score = 0;
     private int bestScore;
     private int questScore;
@@ -58,29 +55,5 @@ public class DataManager : Singleton<DataManager>
     public void DeleteData()
     {
         PlayerPrefs.DeleteAll();
-    }
-
-    public void SaveSceneryVolume(float volume)
-    {
-        sceneryVolume = volume;
-
-        PlayerPrefs.SetFloat("Scenery Volume", sceneryVolume);
-    }
-
-    public void SaveEffectVolume(float volume)
-    {
-        effectVolume = volume;
-
-        PlayerPrefs.SetFloat("Effect Volume", effectVolume);
-    }
-
-    public float LoadSceneryVolume()
-    {
-        return PlayerPrefs.GetFloat("Scenery Volume");
-    }
-
-    public float LoadEffectVolume()
-    {
-        return PlayerPrefs.GetFloat("Effect Volume");
     }
 }

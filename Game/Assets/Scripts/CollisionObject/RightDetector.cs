@@ -14,7 +14,7 @@ public class RightDetector : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Obstacle obstacle= other.GetComponent<Obstacle>();
+        Obstacle obstacle = other.GetComponent<Obstacle>();
 
         if(obstacle != null)
         {
