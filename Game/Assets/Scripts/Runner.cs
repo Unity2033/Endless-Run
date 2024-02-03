@@ -15,11 +15,10 @@ public class Runner : MonoBehaviour
     public Animator animator;
 
     [SerializeField] RoadLine roadLine;
+    [SerializeField] RoadLine previousRoadLine;
+
     [SerializeField] float speed = 25.0f;
     [SerializeField] float positionX = 4f;
-
-    [SerializeField] LeftDetector leftDetector;
-    [SerializeField] RightDetector rightDetector;
 
     private void OnEnable()
     {
@@ -46,14 +45,12 @@ public class Runner : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (leftDetector.Detector)
-            {
-                return;
-            }
-
             if (roadLine > RoadLine.LEFT)
             {
+                previousRoadLine = roadLine;
+
                 roadLine--;
+
                 animator.Play("Left Avoid");
             }
         }
@@ -61,17 +58,20 @@ public class Runner : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (rightDetector.Detector)
-            {
-                return;
-            }
-
             if (roadLine < RoadLine.RIGHT)
             {
+                previousRoadLine = roadLine;
+
                 roadLine++;
+
                 animator.Play("Right Avoid");
             }
         }
+    }
+
+    public void RevertPosition()
+    {
+        roadLine = previousRoadLine;
     }
 
     public void Status(RoadLine roadLine)

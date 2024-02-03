@@ -6,12 +6,9 @@ public class GameOverPanel : MonoBehaviour
     [SerializeField] Text bestScoreText;
     [SerializeField] Button resumeButton;
 
-    public void Start()
+    public void OnEnable()
     {
-        if (DataManager.instance.BestScore < DataManager.instance.Score)
-        {
-            DataManager.instance.BestScore = DataManager.instance.Score;
-        }
+        DataManager.instance.RenewalBestScore();
 
         RenewalRank();
     }

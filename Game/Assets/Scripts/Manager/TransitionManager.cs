@@ -9,7 +9,6 @@ public enum SceneID
 { 
    TITLE,
    GAME,
-   SHOP
 }
 
 public class TransitionManager : Singleton<TransitionManager>
@@ -61,6 +60,8 @@ public class TransitionManager : Singleton<TransitionManager>
             if (asyncOperation.progress >= 0.9f)
             {
                 color.a = Mathf.Lerp(color.a, 1f, Time.unscaledDeltaTime);
+
+                sceneImage.color = color;
 
                 if (color.a >= 1.0f)
                 {

@@ -6,19 +6,20 @@ public class ObstacleManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> obstacleList;
 
-    [SerializeField] Transform [] createPositions;
-    [SerializeField] GameObject [] obstaclePrefabs;
+    [SerializeField] Transform  [ ] createPositions;
+    [SerializeField] GameObject [ ] obstaclePrefabs;
 
     [SerializeField] int random;
     [SerializeField] int compare;
-    [SerializeField] int createCount;
     [SerializeField] int randomPosition;
+
+    [SerializeField] float maximumTime = 2.5f; 
+    [SerializeField] float minimumTime = 2.25f;
+    [SerializeField] float decreaseTime = 0.05f;
 
     void Start()
     {
-        obstacleList.Capacity = 10;
-
-        createCount = createPositions.Length;
+        obstacleList.Capacity = 20;
 
         CreateObstacle();
         StartCoroutine(ActiveObstacle());
@@ -53,7 +54,7 @@ public class ObstacleManager : MonoBehaviour
     {
         while (GameManager.instance.state) 
         {
-            for (int i = 0; i < Random.Range(1, createCount); i++)
+            for (int i = 0; i < Random.Range(1, createPositions.Length); i++)
             {
                 random = Random.Range(0, obstacleList.Count);
 
@@ -96,7 +97,17 @@ public class ObstacleManager : MonoBehaviour
                 obstacleList[random].SetActive(true);
             }
 
-            yield return CoroutineCache.waitForSeconds(Random.Range(LevelManager.minimumSpawn, LevelManager.maximumSpawn));
+            yield return CoroutineCache.waitForSeconds(Random.Range(minimumTime, maximumTime));
         }
     }
+
+    public void ControlDifficulty()
+    {
+        if (maximumTime > 0.5f)
+        {
+            maximumTime -= decreaseTime;
+            minimumTime -= decreaseTime;
+        }
+    }
+
 }
