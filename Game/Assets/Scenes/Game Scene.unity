@@ -1476,10 +1476,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1433095603}
   - component: {fileID: 1433095602}
-  - component: {fileID: 1433095605}
   - component: {fileID: 1433095606}
+  - component: {fileID: 1433095607}
   m_Layer: 0
-  m_Name: Disable Zone
+  m_Name: Interact Zone
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1515,24 +1515,12 @@ Transform:
   m_GameObject: {fileID: 1433095601}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 0, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1433095605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433095601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73f6cfea9c7e2434792f256baafb4217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &1433095606
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1560,6 +1548,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &1433095607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433095601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64edeb128de8dd449d32d490e01503e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1949980954 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2109670777337831397, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
@@ -1578,6 +1578,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 512255148}
     m_Modifications:
+    - target: {fileID: 255586137965376912, guid: 821ffea7785c34640886fc8a67b04b0f, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 255586137965376912, guid: 821ffea7785c34640886fc8a67b04b0f, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 255586137965376912, guid: 821ffea7785c34640886fc8a67b04b0f, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 512255147}
+    - target: {fileID: 255586137965376912, guid: 821ffea7785c34640886fc8a67b04b0f, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 255586137965376912, guid: 821ffea7785c34640886fc8a67b04b0f, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NewPosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 255586137965376912, guid: 821ffea7785c34640886fc8a67b04b0f, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RoadManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 255586137965376912, guid: 821ffea7785c34640886fc8a67b04b0f, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 269738860223123557, guid: 821ffea7785c34640886fc8a67b04b0f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -2282,6 +2310,34 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7828429299272351004, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7828429299272351004, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7828429299272351004, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 512255147}
+    - target: {fileID: 7828429299272351004, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7828429299272351004, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NewPosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 7828429299272351004, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RoadManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7828429299272351004, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 8611288364084528853, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
@@ -2434,6 +2490,34 @@ PrefabInstance:
     - target: {fileID: 4501227400398925986, guid: adfab0c750f07e64191699712a616767, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4622415815617432161, guid: adfab0c750f07e64191699712a616767, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4622415815617432161, guid: adfab0c750f07e64191699712a616767, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4622415815617432161, guid: adfab0c750f07e64191699712a616767, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 512255147}
+    - target: {fileID: 4622415815617432161, guid: adfab0c750f07e64191699712a616767, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4622415815617432161, guid: adfab0c750f07e64191699712a616767, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NewPosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 4622415815617432161, guid: adfab0c750f07e64191699712a616767, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RoadManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4622415815617432161, guid: adfab0c750f07e64191699712a616767, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5501098799430626086, guid: adfab0c750f07e64191699712a616767, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -2696,6 +2780,34 @@ PrefabInstance:
     - target: {fileID: 3477448800836907887, guid: 802d17d47bc34d640b630e202a309a69, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445364456129386198, guid: 802d17d47bc34d640b630e202a309a69, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445364456129386198, guid: 802d17d47bc34d640b630e202a309a69, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445364456129386198, guid: 802d17d47bc34d640b630e202a309a69, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 512255147}
+    - target: {fileID: 4445364456129386198, guid: 802d17d47bc34d640b630e202a309a69, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445364456129386198, guid: 802d17d47bc34d640b630e202a309a69, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: NewPosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445364456129386198, guid: 802d17d47bc34d640b630e202a309a69, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: RoadManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445364456129386198, guid: 802d17d47bc34d640b630e202a309a69, type: 3}
+      propertyPath: callback.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4514335693904978523, guid: 802d17d47bc34d640b630e202a309a69, type: 3}
       propertyPath: m_StaticEditorFlags

@@ -12,7 +12,7 @@ public enum RoadLine
 
 public class Runner : MonoBehaviour
 {
-    public Animator animator;
+    [SerializeField] Animator animator;
 
     [SerializeField] RoadLine roadLine;
     [SerializeField] RoadLine previousRoadLine;
@@ -20,32 +20,49 @@ public class Runner : MonoBehaviour
     [SerializeField] float speed = 25.0f;
     [SerializeField] float positionX = 4f;
 
+    [SerializeField] bool state = true;
+
     private void OnEnable()
     {
-        InputManager.instance.keyAction += Move;
+        InputManager.instance.keyAction += OnKeyUpdate;
+        
+        EventManager.Susbscribe(EventType.START, Execute);
+        EventManager.Susbscribe(EventType.STOP , Stop);
+    }
+
+    private void Execute()
+    {
+        state = true;
+    }
+
+    private void Stop()
+    {
+        animator.Play("Die");
+
+        ResourceManager.instance.Instance("Game Over Panel", GameObject.Find("UI Canvas").transform);
+
+        state = false;
     }
 
     void Start()
     {
         roadLine = RoadLine.MIDDLE;
+        previousRoadLine = RoadLine.MIDDLE;
         animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        Status(roadLine);
+        Move();
     }
 
-    public void Move()
+    public void OnKeyUpdate()
     {
-        if (GameManager.instance.state == false)
-        {
-            return;
-        }
-
+        if (state == false) return;
+        
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (roadLine > RoadLine.LEFT)
+            if (roadLine != RoadLine.LEFT)
             {
                 previousRoadLine = roadLine;
 
@@ -58,7 +75,7 @@ public class Runner : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (roadLine < RoadLine.RIGHT)
+            if (roadLine != RoadLine.RIGHT)
             {
                 previousRoadLine = roadLine;
 
@@ -74,27 +91,24 @@ public class Runner : MonoBehaviour
         roadLine = previousRoadLine;
     }
 
-    public void Status(RoadLine roadLine)
+    private void Move()
     {
-        switch (roadLine)
-        {
-            case RoadLine.LEFT : SmoothMovement(-positionX);
-                break;
-            case RoadLine.MIDDLE : SmoothMovement(0);
-                break;
-            case RoadLine.RIGHT : SmoothMovement(positionX);
-                break;
-        }
-    }
+        if (state == false) return;
 
-    private void SmoothMovement(float x)
-    {
-        transform.position = Vector3.Lerp(transform.position, new Vector3(x, 0, 0), speed * Time.deltaTime);
+        transform.position = Vector3.Lerp
+        (
+            transform.position, 
+            new Vector3(positionX * (int)roadLine, 0, 0), 
+            speed * Time.deltaTime
+        );
     }
 
     private void OnDisable()
     {
-        InputManager.instance.keyAction -= Move;
+        InputManager.instance.keyAction -= OnKeyUpdate;
+
+        EventManager.Unsubscribe(EventType.START, Execute);
+        EventManager.Unsubscribe(EventType.STOP , Stop);
     }
 
     private void OnTriggerEnter(Collider other)

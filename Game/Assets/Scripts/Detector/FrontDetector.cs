@@ -2,8 +2,8 @@ public class FrontDetector : CollisionObject
 {
     public override void Activate(Runner runner)
     {
-        runner.animator.Play("Die");
+        EventManager.Publish(EventType.STOP);
 
-        GameManager.instance.GameOver();
+        //GameManager.instance.GameOver();
     }
 }

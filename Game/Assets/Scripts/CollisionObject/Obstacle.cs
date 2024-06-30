@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+public class Obstacle : MonoBehaviour, IHitable
 {
     [SerializeField] float speed;
+    [SerializeField] bool state = true;
 
     [SerializeField] Vector3 direction;
     [SerializeField] Sound sound = new Sound();
@@ -16,17 +17,40 @@ public class Obstacle : MonoBehaviour
         get { return speed; }
     }
 
+    public void Activate()
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void Execute()
+    {
+        state = true;
+    }
+
+    private void Stop()
+    {
+        state = false;
+    }
+
     private void OnEnable()
     {
-        direction = Vector3.forward;
+        EventManager.Susbscribe(EventType.START, Execute);
+        EventManager.Susbscribe(EventType.STOP, Stop);
 
-        speed = GameManager.instance.speed + Random.Range(10, 20);
+        direction = Vector3.forward;
+        speed = Random.Range(20, 30);
     }
 
     void Update()
     {
-        if (GameManager.instance.state == false) return;
+        if (state == false) return;
 
         transform.Translate(direction * speed * Time.deltaTime);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(EventType.START, Execute);
+        EventManager.Unsubscribe(EventType.STOP , Stop);
     }
 }
