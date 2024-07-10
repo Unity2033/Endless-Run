@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class State : MonoBehaviour
+{
+    [SerializeField] protected bool state = true;
+
+    protected void OnEnable()
+    {
+        EventManager.Susbscribe(EventType.START, OnExecute);
+        EventManager.Susbscribe(EventType.STOP, OnStop);
+    }
+
+    protected void OnExecute()
+    {
+        state = true;
+    }
+
+    protected void OnStop()
+    {
+        state = false;
+    }
+
+    protected void OnDisable()
+    {
+        EventManager.Unsubscribe(EventType.START, OnExecute);
+        EventManager.Unsubscribe(EventType.STOP, OnStop);
+    }
+
+}

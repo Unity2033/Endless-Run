@@ -10,7 +10,7 @@ public enum RoadLine
     RIGHT = 1
 }
 
-public class Runner : MonoBehaviour
+public class Runner : State
 {
     [SerializeField] Animator animator;
 
@@ -20,35 +20,18 @@ public class Runner : MonoBehaviour
     [SerializeField] float speed = 25.0f;
     [SerializeField] float positionX = 4f;
 
-    [SerializeField] bool state = true;
-
     private void OnEnable()
     {
-        InputManager.instance.keyAction += OnKeyUpdate;
-        
-        EventManager.Susbscribe(EventType.START, Execute);
-        EventManager.Susbscribe(EventType.STOP , Stop);
+        base.OnEnable();
+
+        InputManager.instance.keyAction += OnKeyUpdate;      
     }
 
-    private void Execute()
-    {
-        state = true;
-    }
-
-    private void Stop()
-    {
-        animator.Play("Die");
-
-        ResourceManager.instance.Instance("Game Over Panel", GameObject.Find("UI Canvas").transform);
-
-        state = false;
-    }
 
     void Start()
     {
         roadLine = RoadLine.MIDDLE;
         previousRoadLine = RoadLine.MIDDLE;
-        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -103,12 +86,25 @@ public class Runner : MonoBehaviour
         );
     }
 
+    public void UpdateAnimator()
+    {
+        animator.speed = SpeedManager.Speed / 20;
+    }
+
+    public void Die()
+    {
+        animator.Play("Die");
+
+        ResourceManager.instance.Instance("Game Over Panel", GameObject.Find("UI Canvas").transform);
+
+        state = false;
+    }
+
     private void OnDisable()
     {
-        InputManager.instance.keyAction -= OnKeyUpdate;
+        base.OnDisable();
 
-        EventManager.Unsubscribe(EventType.START, Execute);
-        EventManager.Unsubscribe(EventType.STOP , Stop);
+        InputManager.instance.keyAction -= OnKeyUpdate;
     }
 
     private void OnTriggerEnter(Collider other)

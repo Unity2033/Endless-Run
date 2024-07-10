@@ -306,12 +306,10 @@ MonoBehaviour:
   - {fileID: 8298511130972636292, guid: 95e106a6bc3e7f24a9163354de44ff2d, type: 3}
   - {fileID: 967159792351130361, guid: 75c3f4aacd3e86c4dafb2c842edd2f18, type: 3}
   - {fileID: 6642334587356195948, guid: 4537b1e1f52e82b4aa7c5f6ae70dfc95, type: 3}
+  state: 1
   random: 0
   compare: 0
   randomPosition: 0
-  maximumTime: 2.5
-  minimumTime: 2.25
-  decreaseTime: 0.05
 --- !u!4 &394051341 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5463847133409040476, guid: 2366d6dc4a4e0224d861c7ab9f4d97a6, type: 3}
@@ -356,12 +354,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a71a1876d7dfa40a08c661c7cb553d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  state: 1
+  offset: 40
   roads:
   - {fileID: 1949980954}
   - {fileID: 1103301374}
   - {fileID: 468649141}
   - {fileID: 2007896383}
-  offset: 40
 --- !u!4 &512255148
 Transform:
   m_ObjectHideFlags: 0
@@ -1560,6 +1559,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d64edeb128de8dd449d32d490e01503e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1675352390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1675352392}
+  - component: {fileID: 1675352391}
+  m_Layer: 0
+  m_Name: Speed Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1675352391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675352390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db17f6c0d6963614b8d7359395ffadc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 1
+  callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5501645545570541728}
+        m_TargetAssemblyTypeName: Runner, Assembly-CSharp
+        m_MethodName: UpdateAnimator
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  limitSpeed: 50
+--- !u!4 &1675352392
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675352390}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1949980954 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2109670777337831397, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
@@ -2712,11 +2772,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5501645545898033071, guid: 2366d6dc4a4e0224d861c7ab9f4d97a6, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 5501645545570541729}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2366d6dc4a4e0224d861c7ab9f4d97a6, type: 3}
+--- !u!114 &5501645545570541728 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5501645545898033071, guid: 2366d6dc4a4e0224d861c7ab9f4d97a6, type: 3}
+  m_PrefabInstance: {fileID: 5501645545570541727}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58910f9ecadf40444af8cfd3e11df51a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!95 &5501645545570541729 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5501645545898033077, guid: 2366d6dc4a4e0224d861c7ab9f4d97a6, type: 3}
+  m_PrefabInstance: {fileID: 5501645545570541727}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8625464347945833128
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3025,3 +3105,4 @@ SceneRoots:
   - {fileID: 1248617751}
   - {fileID: 312757933}
   - {fileID: 1433095603}
+  - {fileID: 1675352392}

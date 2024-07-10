@@ -4,6 +4,6 @@ public class FrontDetector : CollisionObject
     {
         EventManager.Publish(EventType.STOP);
 
-        //GameManager.instance.GameOver();
+        runner.Die();
     }
 }
