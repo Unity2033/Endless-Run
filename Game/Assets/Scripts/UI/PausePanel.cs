@@ -32,6 +32,8 @@ public class PausePanel : MonoBehaviour
 
     public void Quit()
     {
+        Time.timeScale = 1.0f;
+
         AudioManager.instance.Sound(sound.clips[0]);
 
         StartCoroutine(TransitionManager.instance.AsyncLoad(SceneID.TITLE));

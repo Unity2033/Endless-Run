@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class CoroutineCache : MonoBehaviour
 {
-    class FloatCompare : IEqualityComparer<float>
+    class Compare : IEqualityComparer<float>
     {
         public bool Equals(float x, float y)
         {
             return x == y;
         }
 
-        public int GetHashCode(float obj)
+        public int GetHashCode(float hash)
         {
-            return obj.GetHashCode();
+            return hash.GetHashCode();
         }
     }
 
-    private static readonly Dictionary<float, WaitForSeconds> timeInterval = new Dictionary<float, WaitForSeconds>(new FloatCompare());
+    private static readonly Dictionary<float, WaitForSeconds> timeInterval = new Dictionary<float, WaitForSeconds>(new Compare());
 
     public static WaitForSeconds waitForSeconds(float time)
     {

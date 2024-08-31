@@ -24,7 +24,7 @@ public class Obstacle : State, IHitable
     private void OnEnable()
     {
         base.OnEnable();
-
+  
         direction = Vector3.forward;
 
         speed = Random.Range(SpeedManager.Speed, SpeedManager.Speed + 5);

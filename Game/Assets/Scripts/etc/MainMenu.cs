@@ -2,27 +2,22 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    GameObject missionPanel;
-    [SerializeField] Animator animator;
-    [SerializeField] Sound sound = new Sound();
-
     public void Execute()
     {
-        animator.SetTrigger("Start");
         StartCoroutine(TransitionManager.instance.AsyncLoad(SceneID.GAME));
     }
 
-    public void Quest()
+    public void Shop()
     {
-        AudioManager.instance.Sound(sound.clips[0]);
+        Debug.Log("Shop");
+    }
 
-        if (missionPanel == null)
-        {
-            missionPanel = ResourceManager.instance.Instance("Mission Panel", GameObject.Find("Main Menu Canvas").transform);
-        }
-        else
-        {
-            missionPanel.SetActive(true);
-        }
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }

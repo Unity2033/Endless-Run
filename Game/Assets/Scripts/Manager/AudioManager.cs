@@ -23,22 +23,6 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] AudioSource effectSource;
     [SerializeField] AudioSource scenerySource;
 
-    private void Start()
-    {
-        Mute(AudioType.Scenery, Convert.ToBoolean(PlayerPrefs.GetInt("Scenery Power")));
-    }
-
-    public void Mute(AudioType audioType, bool power)
-    {
-        switch (audioType)
-        {
-            case AudioType.Scenery : scenerySource.mute = !power;
-                break;
-            case AudioType.Effect : effectSource.mute = !power;
-                break;
-        }
-    }
-
     public void Sound(AudioClip clip)
     {
         effectSource.PlayOneShot(clip);
