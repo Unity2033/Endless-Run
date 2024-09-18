@@ -17,6 +17,8 @@ public class Runner : State
     [SerializeField] RoadLine roadLine;
     [SerializeField] RoadLine previousRoadLine;
 
+    [SerializeField] Rigidbody rigidBody;
+
     [SerializeField] float speed = 25.0f;
     [SerializeField] float positionX = 4f;
 
@@ -30,6 +32,8 @@ public class Runner : State
 
     void Start()
     {
+        rigidBody = GetComponent<Rigidbody>();
+
         roadLine = RoadLine.MIDDLE;
         previousRoadLine = RoadLine.MIDDLE;
     }
@@ -55,7 +59,6 @@ public class Runner : State
             }
         }
 
-
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (roadLine != RoadLine.RIGHT)
@@ -78,9 +81,9 @@ public class Runner : State
     {
         if (state == false) return;
 
-        transform.position = Vector3.Lerp
+        rigidBody.position = Vector3.Lerp
         (
-            transform.position, 
+            rigidBody.position, 
             new Vector3(positionX * (int)roadLine, 0, 0), 
             speed * Time.deltaTime
         );
