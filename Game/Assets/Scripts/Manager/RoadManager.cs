@@ -23,7 +23,7 @@ public class RoadManager : State
         }
     }
 
-    public void NewPosition()
+    public void InitializePosition()
     {
         GameObject newRoad = roads[0];
         roads.Remove(newRoad);

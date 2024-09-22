@@ -13,7 +13,7 @@ public class Coin : MonoBehaviour
 
         speed = rotationPrefab.GetComponent<RotationGameObject>().Speed;
 
-        transform.localRotation = rotationPrefab.transform.rotation;
+        transform.localRotation = rotationPrefab.transform.localRotation;
     }
 
     void Update()
