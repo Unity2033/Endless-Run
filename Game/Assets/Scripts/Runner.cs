@@ -38,7 +38,7 @@ public class Runner : State
         previousRoadLine = RoadLine.MIDDLE;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         Move();
     }
@@ -97,8 +97,6 @@ public class Runner : State
     public void Die()
     {
         animator.Play("Die");
-
-        ResourceManager.instance.Instance("Game Over Panel", GameObject.Find("UI Canvas").transform);
 
         state = false;
     }

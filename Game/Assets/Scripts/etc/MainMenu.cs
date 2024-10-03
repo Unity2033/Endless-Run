@@ -4,7 +4,7 @@ public class MainMenu : MonoBehaviour
 {
     public void Execute()
     {
-        StartCoroutine(TransitionManager.instance.AsyncLoad(SceneID.GAME));
+        StartCoroutine(SceneryManager.instance.AsyncLoad(1));
     }
 
     public void Shop()

@@ -23,7 +23,7 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] AudioSource effectSource;
     [SerializeField] AudioSource scenerySource;
 
-    public void Sound(AudioClip clip)
+    public void Listen(AudioClip clip)
     {
         effectSource.PlayOneShot(clip);
     }

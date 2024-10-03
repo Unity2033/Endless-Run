@@ -16,7 +16,7 @@ public class SelectButton : MonoBehaviour
     public void OnEnter()
     {
         buttonText.fontSize = 85;
-        AudioManager.instance.Sound(sound.clips[0]);
+        AudioManager.instance.Listen(sound.clips[0]);
     }
 
     public void OnLeave()
@@ -27,6 +27,6 @@ public class SelectButton : MonoBehaviour
     public void OnSelect()
     {
         buttonText.fontSize = 50;
-        AudioManager.instance.Sound(sound.clips[1]);
+        AudioManager.instance.Listen(sound.clips[1]);
     }
 }

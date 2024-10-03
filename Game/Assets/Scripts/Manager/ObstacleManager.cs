@@ -1,40 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Resources;
 using UnityEngine;
 
 public class ObstacleManager : State
 {
-    [SerializeField] List<GameObject> obstacleList;
-
-    [SerializeField] GameObject [ ] obstaclePrefabs;
+    [SerializeField] List<GameObject> obstacles;
 
     [SerializeField] int random;
+    [SerializeField] int createCount = 5;
 
-
-    void Awake()
+    void Start()
     {
-        obstacleList.Capacity = 20;
+        obstacles.Capacity = 10;
 
-        CreateObstacle();
+        Create();
+
+        StartCoroutine(ActiveObstacle());
     }
 
-    public void CreateObstacle()
+    public void Create()
     {
-        for(int i = 0; i < obstaclePrefabs.Length; ++i) 
-        { 
-            GameObject obstacle = Instantiate(obstaclePrefabs[i]);
+        for (int i = 0; i < createCount; i++)
+        {
+            GameObject prefab = ResourcesManager.instance.Instantiate("Cone", gameObject.transform);
 
-            obstacle.SetActive(false);
+            prefab.SetActive(false);
 
-            obstacleList.Add(obstacle);
+            obstacles.Add(prefab);
         }
     }
 
     public bool ExamineActive()
     {
-        for (int i = 0; i < obstacleList.Count; i++)
+        for (int i = 0; i < obstacles.Count; i++)
         {
-            if(obstacleList[i].activeSelf == false)
+            if (obstacles[i].activeSelf == false)
             {
                 return false;
             }
@@ -43,38 +44,37 @@ public class ObstacleManager : State
         return true;
     }
 
-    public IEnumerator ActiveObstacle(Vector3 position)
+    public IEnumerator ActiveObstacle()
     {
-        while (true)
+        while (state)
         {
-            yield return CoroutineCache.waitForSeconds(Random.Range(1, 5));
+            yield return CoroutineCache.WaitForSecond(2.5f);
 
-            random = Random.Range(0, obstacleList.Count);
+            random = Random.Range(0, obstacles.Count);
 
             // 현재 게임 오브젝트가 활성화되어 있는 지 확인합니다.
-            while (obstacleList[random].activeSelf == true)
+            while (obstacles[random].activeSelf == true)
             {
-                if (ExamineActive()) // 현재 리스트에 있는 모든 게임 오브젝트가 활성화되어 있는 지 확인합니다.
+                // 현재 리스트에 있는 모든 게임 오브젝트가 활성화되어 있는 지 확인합니다.
+                if (ExamineActive())
                 {
                     // 모든 게임 오브젝트가 활성화되어 있다면 게임 오브젝트를 새로 생성한 다음
                     // obstacles 리스트에 넣어줍니다.
-                    GameObject obstacle = Instantiate(obstaclePrefabs[Random.Range(0, obstaclePrefabs.Length)]);
+                    GameObject clone = ResourcesManager.instance.Instantiate("Cone", gameObject.transform);
 
-                    obstacle.SetActive(false);
+                    clone.SetActive(false);
 
-                    obstacleList.Add(obstacle);
+                    obstacles.Add(clone);
                 }
 
-                // 현재 리스트에 있는 모든 게임 오브젝트가 활성화되어 있지 않다면
+                // 현재 인덱스에 있는 게임 오브젝트가 활성화되어 있으면
                 // random 변수의 값을 +1을 해서 다시 검색합니다.
-                random = (random + 1) % obstacleList.Count;
+                random = (random + 1) % obstacles.Count;
             }
 
-            // obstacle 오브젝트가 생성되는 위치를 랜덤으로 설정합니다.
-            obstacleList[random].transform.position = position;
-
-            // 랜덤으로 설정된 obstacle 오브젝트를 활성화합니다.
-            obstacleList[random].SetActive(true);
+            // 랜덤으로 설정된 Obstacle 오브젝트를 활성화합니다.
+            obstacles[random].SetActive(true);
         }
     }
+
 }

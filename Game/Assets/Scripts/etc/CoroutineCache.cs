@@ -17,15 +17,15 @@ public class CoroutineCache : MonoBehaviour
         }
     }
 
-    private static readonly Dictionary<float, WaitForSeconds> timeInterval = new Dictionary<float, WaitForSeconds>(new Compare());
+    static readonly Dictionary<float, WaitForSeconds> dictionary = new Dictionary<float, WaitForSeconds>(new Compare());
 
-    public static WaitForSeconds waitForSeconds(float time)
+    public static WaitForSeconds WaitForSecond(float time)
     {
         WaitForSeconds waitForSeconds;
 
-        if (timeInterval.TryGetValue(time, out waitForSeconds) == false)
+        if (dictionary.TryGetValue(time, out waitForSeconds) == false)
         {
-            timeInterval.Add(time, waitForSeconds = new WaitForSeconds(time));
+            dictionary.Add(time, new WaitForSeconds(time));
         }
 
         return waitForSeconds;
