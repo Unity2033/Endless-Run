@@ -206,7 +206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &312757933
 Transform:
   m_ObjectHideFlags: 0
@@ -1404,11 +1404,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: -1
-  parentRoad:
+  parentRoads:
   - {fileID: 1949980955}
   - {fileID: 1103301375}
   - {fileID: 468649142}
   - {fileID: 2007896384}
+  positionRandomX:
+  - {fileID: 1668724131}
+  - {fileID: 1043046966}
+  - {fileID: 1153349373}
+  obstacleManager: {fileID: 312757934}
   randomPositionZ:
   - 0
   - 0
@@ -1434,7 +1439,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499481668}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1442,7 +1447,7 @@ Transform:
   - {fileID: 1668724131}
   - {fileID: 1043046966}
   - {fileID: 1153349373}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1949980955}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1668724130
 GameObject:
@@ -2496,6 +2501,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2109670777337831394, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
       insertIndex: -1
       addedObject: {fileID: 988806098}
+    - targetCorrespondingSourceObject: {fileID: 2109670777337831394, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1499481670}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dc1a11615194e843954baea221e5f81, type: 3}
 --- !u!1001 &3271287696764807938
@@ -3298,4 +3306,3 @@ SceneRoots:
   - {fileID: 1433095603}
   - {fileID: 1675352392}
   - {fileID: 1863156030}
-  - {fileID: 1499481670}

@@ -77,4 +77,9 @@ public class ObstacleManager : State
         }
     }
 
+    public GameObject GetObstacle()
+    {
+        return obstacles[random];
+    }
+
 }
