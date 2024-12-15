@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoadManager : State
+public class RoadManager : MonoBehaviour
 {
     [SerializeField] float offset = 40.0f;
     [SerializeField] List<GameObject> roads;
@@ -15,7 +15,7 @@ public class RoadManager : State
 
     void Update()
     {
-        if (state == false) return;
+        if (GameManager.instance.State == false) return;
 
         for (int i = 0; i < roads.Count; i++)
         {

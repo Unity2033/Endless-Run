@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public enum RoadLine
@@ -10,7 +9,7 @@ public enum RoadLine
     RIGHT = 1
 }
 
-public class Runner : State
+public class Runner : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
@@ -24,11 +23,8 @@ public class Runner : State
 
     private void OnEnable()
     {
-        base.OnEnable();
-
         InputManager.instance.keyAction += OnKeyUpdate;      
     }
-
 
     void Start()
     {
@@ -45,7 +41,7 @@ public class Runner : State
 
     public void OnKeyUpdate()
     {
-        if (state == false) return;
+        if (GameManager.instance.State == false) return;
         
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
@@ -79,7 +75,7 @@ public class Runner : State
 
     private void Move()
     {
-        if (state == false) return;
+        if (GameManager.instance.State == false) return;
 
         rigidBody.position = Vector3.Lerp
         (
@@ -98,19 +94,17 @@ public class Runner : State
     {
         animator.Play("Die");
 
-        state = false;
+        GameManager.instance.Finish();
     }
 
     private void OnDisable()
     {
-        base.OnDisable();
-
         InputManager.instance.keyAction -= OnKeyUpdate;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        CollisionObject collisionObject = other.GetComponent<CollisionObject>();
+        Obstacle collisionObject = other.GetComponent<Obstacle>();
 
         if(collisionObject != null)
         {

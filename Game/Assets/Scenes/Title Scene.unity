@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 9
+  serializedVersion: 10
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -44,7 +44,6 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 12
-  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -67,9 +66,6 @@ LightmapSettings:
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
     m_TextureCompression: 1
-    m_FinalGather: 0
-    m_FinalGatherFiltering: 1
-    m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
     m_BakeBackend: 1
@@ -97,7 +93,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 20201, guid: 0000000000000000f000000000000000, type: 0}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -137,11 +133,11 @@ PrefabInstance:
     m_TransformParent: {fileID: 98763240}
     m_Modifications:
     - target: {fileID: 2049412630408830034, guid: c6dd2221092aa1645adbe0d726ab39d9, type: 3}
-      propertyPath: sound.clips.Array.data[0]
+      propertyPath: 'sound.clips.Array.data[0]'
       value: 
       objectReference: {fileID: 8300000, guid: d1059d0626240c84cbc5d95080d95ee6, type: 3}
     - target: {fileID: 2049412630408830034, guid: c6dd2221092aa1645adbe0d726ab39d9, type: 3}
-      propertyPath: sound.clips.Array.data[1]
+      propertyPath: 'sound.clips.Array.data[1]'
       value: 
       objectReference: {fileID: 8300000, guid: 6cc453bfb07f1334a98fa0d5f46dbba3, type: 3}
     - target: {fileID: 2631208140381209820, guid: c6dd2221092aa1645adbe0d726ab39d9, type: 3}
@@ -775,6 +771,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1067,6 +1064,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1294,9 +1292,8 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1242752175}
   m_Enabled: 1
-  serializedVersion: 10
+  serializedVersion: 11
   m_Type: 1
-  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
@@ -1372,11 +1369,11 @@ PrefabInstance:
     m_TransformParent: {fileID: 98763240}
     m_Modifications:
     - target: {fileID: 2049412630408830034, guid: c6dd2221092aa1645adbe0d726ab39d9, type: 3}
-      propertyPath: sound.clips.Array.data[0]
+      propertyPath: 'sound.clips.Array.data[0]'
       value: 
       objectReference: {fileID: 8300000, guid: d1059d0626240c84cbc5d95080d95ee6, type: 3}
     - target: {fileID: 2049412630408830034, guid: c6dd2221092aa1645adbe0d726ab39d9, type: 3}
-      propertyPath: sound.clips.Array.data[1]
+      propertyPath: 'sound.clips.Array.data[1]'
       value: 
       objectReference: {fileID: 8300000, guid: 6cc453bfb07f1334a98fa0d5f46dbba3, type: 3}
     - target: {fileID: 2631208140381209820, guid: c6dd2221092aa1645adbe0d726ab39d9, type: 3}
@@ -1488,6 +1485,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6dd2221092aa1645adbe0d726ab39d9, type: 3}
+--- !u!1 &1381736333
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1381736335}
+  - component: {fileID: 1381736334}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1381736334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381736333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e36e9a88a934bd34180963d4ea4c8b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1381736335
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381736333}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1407012335 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 3da5840b5d838524cb0128fbccf00053, type: 3}
@@ -1583,13 +1624,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1501596282}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.8, z: -10}
+  m_LocalRotation: {x: 0.22571622, y: 0, z: 0, w: 0.97419316}
+  m_LocalPosition: {x: 0, y: 3.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 26.09, y: 0, z: 0}
 --- !u!4 &1589426422 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 8fa324388c16b5c4eac9846338b35b17, type: 3}
@@ -2005,6 +2046,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2088,6 +2131,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2194,11 +2239,11 @@ PrefabInstance:
     m_TransformParent: {fileID: 98763240}
     m_Modifications:
     - target: {fileID: 2049412630408830034, guid: c6dd2221092aa1645adbe0d726ab39d9, type: 3}
-      propertyPath: sound.clips.Array.data[0]
+      propertyPath: 'sound.clips.Array.data[0]'
       value: 
       objectReference: {fileID: 8300000, guid: d1059d0626240c84cbc5d95080d95ee6, type: 3}
     - target: {fileID: 2049412630408830034, guid: c6dd2221092aa1645adbe0d726ab39d9, type: 3}
-      propertyPath: sound.clips.Array.data[1]
+      propertyPath: 'sound.clips.Array.data[1]'
       value: 
       objectReference: {fileID: 8300000, guid: 6cc453bfb07f1334a98fa0d5f46dbba3, type: 3}
     - target: {fileID: 2631208140381209820, guid: c6dd2221092aa1645adbe0d726ab39d9, type: 3}
@@ -2296,7 +2341,7 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: c6dd2221092aa1645adbe0d726ab39d9, type: 3}
 --- !u!95 &5196187380466037168
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2310,6 +2355,7 @@ Animator:
   m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -2374,6 +2420,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2492,6 +2540,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2647,6 +2697,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2738,6 +2790,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2774,7 +2828,8 @@ SceneRoots:
   - {fileID: 266852001}
   - {fileID: 1716067231}
   - {fileID: 1022157236}
+  - {fileID: 5536938230390510326}
   - {fileID: 345768535}
   - {fileID: 1811866030}
-  - {fileID: 5536938230390510326}
   - {fileID: 930408875}
+  - {fileID: 1381736335}

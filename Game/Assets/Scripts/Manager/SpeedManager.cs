@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SpeedManager : State
+public class SpeedManager : MonoBehaviour
 {
     [SerializeField] UnityEvent callback;
 
@@ -22,10 +22,10 @@ public class SpeedManager : State
 
         StartCoroutine(Increase());
     }
-
+ 
     IEnumerator Increase()
     {
-        while (state == true && limitSpeed > speed)
+        while (GameManager.instance.State == true && limitSpeed > speed)
         {
             if (callback != null)
             {

@@ -4,6 +4,8 @@ public class MainMenu : MonoBehaviour
 {
     public void Execute()
     {
+        GameManager.instance.Execute();
+
         StartCoroutine(SceneryManager.instance.AsyncLoad(1));
     }
 
