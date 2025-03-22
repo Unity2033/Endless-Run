@@ -1,5 +1,6 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System.Collections;
 
 public class TimeManager : Singleton<TimeManager>
 {
@@ -31,13 +32,11 @@ public class TimeManager : Singleton<TimeManager>
 
     IEnumerator Decrease()
     {
-        while (GameManager.Instance.State && activeTime > 0.25f)
+        while (GameManager.instance.State && activeTime > 0.25f)
         {
             yield return CoroutineCache.WaitForSecond(4.0f);
 
             activeTime -= 0.25f;
-
-            Debug.Log(activeTime);
         }
     }
 

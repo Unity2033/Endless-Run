@@ -7,6 +7,13 @@ public class MouseManager : Singleton<MouseManager>
 {
     [SerializeField] Texture2D texture2D;
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        texture2D = Resources.Load<Texture2D>("Default");
+    }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -18,24 +25,22 @@ public class MouseManager : Singleton<MouseManager>
         {
             case 0:
                 {
-                    texture2D = ResourcesManager.instance.Load<Texture2D>("Default");
                     Cursor.visible = true;
                     Cursor.lockState = CursorLockMode.None;
-                    Cursor.SetCursor(texture2D, Vector2.zero, CursorMode.ForceSoftware);
                 }
                 break;
             case 1:
                 {
-                    texture2D = ResourcesManager.instance.Load<Texture2D>("Default");
                     Cursor.visible = false;
                     Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.SetCursor(texture2D, Vector2.zero, CursorMode.ForceSoftware);
                 }
                 break;
         }
+
+        Cursor.SetCursor(texture2D, Vector2.zero, CursorMode.ForceSoftware);
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
         State(scene.buildIndex);
     }

@@ -14,7 +14,6 @@ public class Runner : MonoBehaviour
     [SerializeField] Animator animator;
 
     [SerializeField] RoadLine roadLine;
-    [SerializeField] RoadLine previousRoadLine;
 
     [SerializeField] Rigidbody rigidBody;
 
@@ -29,9 +28,6 @@ public class Runner : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
-
-        roadLine = RoadLine.MIDDLE;
-        previousRoadLine = RoadLine.MIDDLE;
     }
 
     private void FixedUpdate()
@@ -41,14 +37,10 @@ public class Runner : MonoBehaviour
 
     public void OnKeyUpdate()
     {
-        if (GameManager.instance.State == false) return;
-        
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             if (roadLine != RoadLine.LEFT)
             {
-                previousRoadLine = roadLine;
-
                 roadLine--;
 
                 animator.Play("Left Avoid");
@@ -59,18 +51,11 @@ public class Runner : MonoBehaviour
         {
             if (roadLine != RoadLine.RIGHT)
             {
-                previousRoadLine = roadLine;
-
                 roadLine++;
 
                 animator.Play("Right Avoid");
             }
         }
-    }
-
-    public void RevertPosition()
-    {
-        roadLine = previousRoadLine;
     }
 
     private void Move()
@@ -85,7 +70,7 @@ public class Runner : MonoBehaviour
         );
     }
 
-    public void UpdateAnimator()
+    public void Synchronize()
     {
         animator.speed = SpeedManager.Speed / 20;
     }
@@ -108,7 +93,7 @@ public class Runner : MonoBehaviour
 
         if(collisionObject != null)
         {
-            collisionObject.Activate(this);
+            Die();
         }
     }
 }

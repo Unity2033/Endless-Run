@@ -12,6 +12,8 @@ public class ObstacleManager : MonoBehaviour
 
     void Start()
     {
+        obstacles.Capacity = 10;
+
         Create();
 
         StartCoroutine(ActiveObstacle());
@@ -19,9 +21,6 @@ public class ObstacleManager : MonoBehaviour
 
     public void Create()
     {
-
-        obstacles.Capacity = 10;
-
         for (int i = 0; i < createCount; i++)
         {
             GameObject prefab = ResourcesManager.instance.Instantiate("Cone", gameObject.transform);

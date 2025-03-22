@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoroutineCache : MonoBehaviour
+public class CoroutineCache
 {
     class Compare : IEqualityComparer<float>
     {

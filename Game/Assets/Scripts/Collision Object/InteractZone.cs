@@ -6,11 +6,11 @@ public class InteractZone : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        IHitable clone = other.GetComponent<IHitable>();
+        Road road = other.GetComponent<Road>();
 
-        if(clone != null)
+        if(road != null)
         {
-            clone.Activate();
+            road.Activate();
         }    
     }
 }
