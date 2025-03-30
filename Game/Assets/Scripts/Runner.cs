@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,8 +18,10 @@ public class Runner : MonoBehaviour
 
     [SerializeField] Rigidbody rigidBody;
 
-    [SerializeField] float speed = 25.0f;
     [SerializeField] float positionX = 4f;
+
+    [SerializeField] CinemachineVirtualCamera cinemachineVirtualCamera;
+
 
     private void OnEnable()
     {
@@ -65,14 +68,14 @@ public class Runner : MonoBehaviour
         rigidBody.position = Vector3.Lerp
         (
             rigidBody.position, 
-            new Vector3(positionX * (int)roadLine, 0, 0), 
-            speed * Time.deltaTime
+            new Vector3(positionX * (int)roadLine, 0, 0),
+            SpeedManager.instance.Speed * Time.deltaTime
         );
     }
 
     public void Synchronize()
     {
-        animator.speed = SpeedManager.Speed / 20;
+        animator.speed = SpeedManager.instance.Speed / SpeedManager.instance.InitializeSpeed;
     }
 
     public void Die()
@@ -80,6 +83,8 @@ public class Runner : MonoBehaviour
         animator.Play("Die");
 
         GameManager.instance.Finish();
+
+        cinemachineVirtualCamera.LookAt = transform;
     }
 
     private void OnDisable()

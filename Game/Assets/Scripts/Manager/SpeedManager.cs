@@ -1,40 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-public class SpeedManager : MonoBehaviour
+public class SpeedManager : Singleton<SpeedManager>
 {
-    [SerializeField] UnityEvent callback;
+    [SerializeField] float speed = 30.0f;
+    [SerializeField] float limitSpeed = 60.0f;
 
-    [SerializeField] static float speed;
-    [SerializeField] float limitSpeed = 50.0f;
+    [SerializeField] float initializeSpeed;
 
-    public static float Speed
+    [SerializeField] Runner runner;
+
+    public float Speed { get { return speed; } }
+
+    public float InitializeSpeed { get { return initializeSpeed; } }
+
+    private void OnEnable()
     {
-        get { return speed; }
-        set { speed = value; }
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void Awake()
-    {
-        speed = 20.0f;
-
-        StartCoroutine(Increase());
-    }
- 
     IEnumerator Increase()
     {
-        while (GameManager.instance.State == true && limitSpeed > speed)
+        while(GameManager.instance.State && speed < limitSpeed)
         {
-            if (callback != null)
-            {
-                callback.Invoke();
-            }
+            yield return CoroutineCache.WaitForSecond(5.0f);
 
-            yield return new WaitForSeconds(2.5f);
+            speed += 2.5f;
 
-            speed++;
+            runner.Synchronize();
         }
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        speed = 30f;
+
+        initializeSpeed = speed;
+
+        if (scene.buildIndex == 1)
+        {
+            runner = GameObject.Find("Runner").GetComponent<Runner>();
+
+            StartCoroutine(Increase());
+        }
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

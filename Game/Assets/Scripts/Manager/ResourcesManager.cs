@@ -21,12 +21,7 @@ public class ResourcesManager : Singleton<ResourcesManager>
 
         GameObject clone = Object.Instantiate(prefab, parent);
 
-        int index = clone.name.IndexOf("(Clone)");
-
-        if (index > 0)
-        {
-            clone.name = clone.name.Substring(0, index);
-        }
+        clone.name = clone.name.Replace("(Clone)", "");
 
         return clone;
     }

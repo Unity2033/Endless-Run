@@ -2,19 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour
+public class Obstacle : MonoBehaviour, IHitable
 {
-    [SerializeField] Vector3[] randomVector3 = new Vector3[3];
-
-    private void Awake()
+    public void Activate()
     {
-        randomVector3[0] = new Vector3(-4, 0, 0);
-        randomVector3[1] = new Vector3(0, 0, 0);
-        randomVector3[2] = new Vector3(4, 0, 0);
+        gameObject.SetActive(false);
     }
 
-    private void OnEnable()
+    private void Update()
     {
-        transform.position = randomVector3[Random.Range(0, randomVector3.Length)];
+        if (GameManager.instance.State == false) return;
+
+        transform.Translate(Vector3.back * SpeedManager.instance.Speed * Time.deltaTime);
     }
 }

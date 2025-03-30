@@ -20,8 +20,6 @@ public class GameManager : Singleton<GameManager>
     {
         state = false;
 
-        SpeedManager.Speed = 0;
-
         MouseManager.instance.State(0);
     }
 }
