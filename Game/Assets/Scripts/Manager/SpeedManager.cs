@@ -16,6 +16,13 @@ public class SpeedManager : Singleton<SpeedManager>
 
     public float InitializeSpeed { get { return initializeSpeed; } }
 
+    private void Start()
+    {
+        runner = GameObject.Find("Runner").GetComponent<Runner>();
+
+        StartCoroutine(Increase());
+    }
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -38,13 +45,6 @@ public class SpeedManager : Singleton<SpeedManager>
         speed = 30f;
 
         initializeSpeed = speed;
-
-        if (scene.buildIndex == 1)
-        {
-            runner = GameObject.Find("Runner").GetComponent<Runner>();
-
-            StartCoroutine(Increase());
-        }
     }
 
     private void OnDisable()

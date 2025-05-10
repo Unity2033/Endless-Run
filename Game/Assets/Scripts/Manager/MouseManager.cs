@@ -3,20 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MouseManager : Singleton<MouseManager>
+public class MouseManager :MonoBehaviour
 {
     [SerializeField] Texture2D texture2D;
 
-    protected override void Awake()
+    void Awake()
     {
-        base.Awake();
-
         texture2D = Resources.Load<Texture2D>("Default");
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        State(0);
     }
 
     public void State(int state)
@@ -38,15 +36,5 @@ public class MouseManager : Singleton<MouseManager>
         }
 
         Cursor.SetCursor(texture2D, Vector2.zero, CursorMode.ForceSoftware);
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
-    {
-        State(scene.buildIndex);
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

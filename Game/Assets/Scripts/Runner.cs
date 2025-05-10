@@ -23,14 +23,14 @@ public class Runner : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera cinemachineVirtualCamera;
 
 
-    private void OnEnable()
-    {
-        InputManager.instance.keyAction += OnKeyUpdate;      
-    }
-
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        Keyboard();
     }
 
     private void FixedUpdate()
@@ -38,8 +38,10 @@ public class Runner : MonoBehaviour
         Move();
     }
 
-    public void OnKeyUpdate()
+    public void Keyboard()
     {
+        if (GameManager.instance.State == false) return;
+
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             if (roadLine != RoadLine.LEFT)
@@ -85,11 +87,6 @@ public class Runner : MonoBehaviour
         GameManager.instance.Finish();
 
         cinemachineVirtualCamera.LookAt = transform;
-    }
-
-    private void OnDisable()
-    {
-        InputManager.instance.keyAction -= OnKeyUpdate;
     }
 
     private void OnTriggerEnter(Collider other)

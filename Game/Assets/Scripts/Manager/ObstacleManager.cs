@@ -18,8 +18,6 @@ public class ObstacleManager : MonoBehaviour
         obstacles.Capacity = 10;
 
         Create();
-
-        StartCoroutine(ActiveObstacle());
     }
 
     public void Create()
@@ -79,5 +77,10 @@ public class ObstacleManager : MonoBehaviour
 
             obstacles[random].SetActive(true);
         }
+    }
+
+    public void Activate()
+    {
+        StartCoroutine(ActiveObstacle());
     }
 }
