@@ -1,35 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
-public class GameManager : Singleton<GameManager>
+public class GameManager : MonoBehaviour
 {
-    private bool state;
-
-    [SerializeField] UnityEvent resume;
-    [SerializeField] UnityEvent finish;
-    [SerializeField] UnityEvent execute;
-
-    public bool State
-    {
-        get { return state; }
-    }
-
     public void Execute()
     {
-        state = true;
+        State.Ready = true;
 
-        execute?.Invoke();
+        State.OnExecute?.Invoke();
     }
 
     public void Finish()
     {
-        state = false;
+        State.Ready = false;
 
-        finish?.Invoke();
+        State.OnFinish?.Invoke();
     }
 
     public void Resume()

@@ -12,29 +12,36 @@ public class MouseManager :MonoBehaviour
         texture2D = Resources.Load<Texture2D>("Default");
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        State(0);
+        State.OnFinish += EnableMouse;
+
+        State.OnExecute += DisableMouse;
     }
 
-    public void State(int state)
+    private void Start()
     {
-        switch (state)
-        {
-            case 0:
-                {
-                    Cursor.visible = true;
-                    Cursor.lockState = CursorLockMode.None;
-                }
-                break;
-            case 1:
-                {
-                    Cursor.visible = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                }
-                break;
-        }
+        EnableMouse();
 
         Cursor.SetCursor(texture2D, Vector2.zero, CursorMode.ForceSoftware);
+    }
+
+    public void DisableMouse()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void EnableMouse()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    private void OnDisable()
+    {
+        State.OnFinish -= EnableMouse;
+
+        State.OnExecute += DisableMouse;
     }
 }

@@ -23,7 +23,7 @@ public class SceneryManager : Singleton<SceneryManager>
 
         while (color.a >= 0.0f)
         {
-            color.a -= Time.deltaTime;
+            color.a -= Time.unscaledDeltaTime;
 
             screenImage.color = color;
 

@@ -1,53 +1,46 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
-public class TimeManager : Singleton<TimeManager>
+public class TimeManager : MonoBehaviour
 {
-    [SerializeField] float activeTime;
-    [SerializeField] float increaseTime;
+    [SerializeField] float time;
+    [SerializeField] int minute;
+    [SerializeField] int second;
+    [SerializeField] int milliseconds;
 
-    public float ActiveTime
-    {
-        get { return activeTime; }
-    }
-
-    public float IncreaseTime
-    {
-        get { return increaseTime; }
-    }
-
-    protected override void Awake()
-    {
-        base.Awake();
-
-        activeTime = 2.5f;
-        increaseTime = 2.5f;
-    }
+    [SerializeField] Text timeText;
 
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        State.OnExecute += Execute;
     }
 
-    IEnumerator Decrease()
+    public void Execute()
     {
-        while (GameManager.instance.State && activeTime > 0.25f)
+
+        StartCoroutine(Measure());
+    }
+
+    IEnumerator Measure()
+    {
+        while (State.Ready)
         {
-            yield return CoroutineCache.WaitForSecond(4.0f);
+            time += Time.deltaTime;
 
-            activeTime -= 0.25f;
+            minute = (int)time / 60;
+            second = (int)time % 60;
+            milliseconds = (int)(time * 100) % 100;
+
+            timeText.text = string.Format("{0:D2} : {1:D2} : {2:D2}", minute, second, milliseconds);
+
+            yield return null;
         }
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
-    {
-        StartCoroutine(Decrease());
     }
 
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        State.OnExecute -= Execute;
     }
-
 }

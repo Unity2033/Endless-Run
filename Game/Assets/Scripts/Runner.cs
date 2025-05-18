@@ -2,6 +2,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum RoadLine
 {
@@ -18,10 +19,19 @@ public class Runner : MonoBehaviour
 
     [SerializeField] Rigidbody rigidBody;
 
+    [SerializeField] AudioClip audioClip;
+
+    [SerializeField] UnityEvent callback;
+
     [SerializeField] float positionX = 4f;
 
-    [SerializeField] CinemachineVirtualCamera cinemachineVirtualCamera;
 
+    private void OnEnable()
+    {
+        State.OnFinish += Die;
+
+        State.OnExecute += Execute;
+    }
 
     void Start()
     {
@@ -30,6 +40,8 @@ public class Runner : MonoBehaviour
 
     private void Update()
     {
+        if (State.Ready == false) return;
+
         Keyboard();
     }
 
@@ -40,8 +52,6 @@ public class Runner : MonoBehaviour
 
     public void Keyboard()
     {
-        if (GameManager.instance.State == false) return;
-
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             if (roadLine != RoadLine.LEFT)
@@ -65,8 +75,6 @@ public class Runner : MonoBehaviour
 
     private void Move()
     {
-        if (GameManager.instance.State == false) return;
-
         rigidBody.position = Vector3.Lerp
         (
             rigidBody.position, 
@@ -80,13 +88,16 @@ public class Runner : MonoBehaviour
         animator.speed = SpeedManager.instance.Speed / SpeedManager.instance.InitializeSpeed;
     }
 
+    public void Execute()
+    {
+        animator.SetTrigger("Start");
+    }
+
     public void Die()
     {
         animator.Play("Die");
 
-        GameManager.instance.Finish();
-
-        cinemachineVirtualCamera.LookAt = transform;
+        AudioManager.instance.Listen(audioClip);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -95,7 +106,14 @@ public class Runner : MonoBehaviour
 
         if(collisionObject != null)
         {
-            Die();
+            callback.Invoke();
         }
+    }
+
+    private void OnDisable()
+    {
+        State.OnFinish -= Die;
+
+        State.OnExecute -= Execute;
     }
 }

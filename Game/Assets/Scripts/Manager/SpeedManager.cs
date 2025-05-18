@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class SpeedManager : Singleton<SpeedManager>
@@ -10,33 +11,33 @@ public class SpeedManager : Singleton<SpeedManager>
 
     [SerializeField] float initializeSpeed;
 
-    [SerializeField] Runner runner;
+    [SerializeField] UnityEvent callback;
 
     public float Speed { get { return speed; } }
 
     public float InitializeSpeed { get { return initializeSpeed; } }
 
-    private void Start()
+    public void Execute()
     {
-        runner = GameObject.Find("Runner").GetComponent<Runner>();
-
         StartCoroutine(Increase());
     }
 
     private void OnEnable()
     {
+        State.OnExecute += Execute;
+
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     IEnumerator Increase()
-    {
-        while(GameManager.instance.State && speed < limitSpeed)
+    {     
+        while (State.Ready && speed < limitSpeed)
         {
             yield return CoroutineCache.WaitForSecond(5.0f);
 
             speed += 2.5f;
 
-            runner.Synchronize();
+            callback.Invoke();
         }
     }
 
@@ -49,6 +50,8 @@ public class SpeedManager : Singleton<SpeedManager>
 
     private void OnDisable()
     {
+        State.OnExecute -= Execute;
+
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 }

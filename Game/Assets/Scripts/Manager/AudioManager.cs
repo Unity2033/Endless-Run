@@ -10,9 +10,21 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] AudioSource effectSource;
     [SerializeField] AudioSource scenerySource;
 
+    private void Start()
+    {
+        scenerySource.loop = true;
+    }
+
     public void Listen(AudioClip clip)
     {
         effectSource.PlayOneShot(clip);
+    }
+
+    public void ScenerySound(string name)
+    {
+        scenerySource.clip = ResourcesManager.instance.Load<AudioClip>(name);
+
+        scenerySource.Play();
     }
 
     void OnEnable()
@@ -22,10 +34,7 @@ public class AudioManager : Singleton<AudioManager>
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        scenerySource.clip = ResourcesManager.instance.Load<AudioClip>(scene.name);
-
-        scenerySource.loop = true;
-        scenerySource.Play();
+         ScenerySound(scene.name);
     }
 
     void OnDisable()

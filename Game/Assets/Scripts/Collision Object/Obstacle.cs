@@ -11,7 +11,7 @@ public class Obstacle : MonoBehaviour, IHitable
 
     private void Update()
     {
-        if (GameManager.instance.State == false) return;
+        if (State.Ready == false) return;
 
         transform.Translate(Vector3.back * SpeedManager.instance.Speed * Time.deltaTime);
     }

@@ -13,6 +13,15 @@ public class ObstacleManager : MonoBehaviour
     [SerializeField] int random;
     [SerializeField] int createCount = 5;
 
+    [SerializeField] float comeOutTime = 2.0f;
+    [SerializeField] float decreaseRate = 0.95f;
+
+
+    private void OnEnable()
+    {
+        State.OnExecute += Execute;
+    }
+
     void Start()
     {
         obstacles.Capacity = 10;
@@ -47,9 +56,9 @@ public class ObstacleManager : MonoBehaviour
 
     public IEnumerator ActiveObstacle()
     {
-        while (GameManager.instance.State)
+        while (State.Ready)
         {
-            yield return CoroutineCache.WaitForSecond(TimeManager.instance.ActiveTime);
+            yield return CoroutineCache.WaitForSecond(comeOutTime);
 
             random = Random.Range(0, obstacles.Count);
 
@@ -76,11 +85,18 @@ public class ObstacleManager : MonoBehaviour
             obstacles[random].transform.position = transforms[Random.Range(0, transforms.Length)].position;
 
             obstacles[random].SetActive(true);
+
+            comeOutTime = Mathf.Max(0.125f, comeOutTime * decreaseRate);
         }
     }
 
-    public void Activate()
+    public void Execute()
     {
         StartCoroutine(ActiveObstacle());
+    }
+
+    private void OnDisable()
+    {   
+        State.OnExecute -= Execute;
     }
 }

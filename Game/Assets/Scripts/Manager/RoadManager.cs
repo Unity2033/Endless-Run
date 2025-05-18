@@ -10,7 +10,7 @@ public class RoadManager : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance.State == false) return;
+        if (State.Ready == false) return;
 
         for (int i = 0; i < roads.Count; i++)
         {
