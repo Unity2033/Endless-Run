@@ -18,9 +18,4 @@ public class GameManager : MonoBehaviour
 
         State.OnFinish?.Invoke();
     }
-
-    public void Resume()
-    {
-        StartCoroutine(SceneryManager.instance.AsyncLoad(SceneManager.GetActiveScene().buildIndex));
-    }
 }

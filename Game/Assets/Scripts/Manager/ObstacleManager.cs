@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Resources;
 using UnityEngine;
 
 public class ObstacleManager : MonoBehaviour
@@ -31,14 +30,13 @@ public class ObstacleManager : MonoBehaviour
 
     public void Create()
     {
-        for (int i = 0; i < createCount; i++)
-        {
-            GameObject prefab = ResourcesManager.instance.Instantiate(obstacleNames[Random.Range(0, obstacleNames.Count)], gameObject.transform);
+        GameObject clone = Instantiate(Resources.Load<GameObject>(obstacleNames[Random.Range(0, obstacleNames.Count)]), transform);
 
-            prefab.SetActive(false);
+        clone.name = clone.name.Replace("(Clone)", "");
 
-            obstacles.Add(prefab);
-        }
+        clone.SetActive(false);
+
+        obstacles.Add(clone);       
     }
 
     public bool ExamineActive()
@@ -58,8 +56,6 @@ public class ObstacleManager : MonoBehaviour
     {
         while (State.Ready)
         {
-            yield return CoroutineCache.WaitForSecond(comeOutTime);
-
             random = Random.Range(0, obstacles.Count);
 
             // 현재 게임 오브젝트가 활성화되어 있는 지 확인합니다.
@@ -70,11 +66,7 @@ public class ObstacleManager : MonoBehaviour
                 {
                     // 모든 게임 오브젝트가 활성화되어 있다면 게임 오브젝트를 새로 생성한 다음
                     // obstacles 리스트에 넣어줍니다.
-                    GameObject clone = ResourcesManager.instance.Instantiate(obstacleNames[Random.Range(0, obstacleNames.Count)], gameObject.transform);
-
-                    clone.SetActive(false);
-
-                    obstacles.Add(clone);
+                    Create();
                 }
 
                 // 현재 인덱스에 있는 게임 오브젝트가 활성화되어 있으면
@@ -85,6 +77,8 @@ public class ObstacleManager : MonoBehaviour
             obstacles[random].transform.position = transforms[Random.Range(0, transforms.Length)].position;
 
             obstacles[random].SetActive(true);
+
+            yield return CoroutineCache.WaitForSecond(comeOutTime);
 
             comeOutTime = Mathf.Max(0.125f, comeOutTime * decreaseRate);
         }

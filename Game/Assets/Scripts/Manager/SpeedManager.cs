@@ -11,11 +11,9 @@ public class SpeedManager : Singleton<SpeedManager>
 
     [SerializeField] float initializeSpeed;
 
-    [SerializeField] UnityEvent callback;
+    [SerializeField] Runner runner;
 
     public float Speed { get { return speed; } }
-
-    public float InitializeSpeed { get { return initializeSpeed; } }
 
     public void Execute()
     {
@@ -37,8 +35,13 @@ public class SpeedManager : Singleton<SpeedManager>
 
             speed += 2.5f;
 
-            callback.Invoke();
+            AnimationSynchronize(runner.GetComponent<Animator>());
         }
+    }
+
+    public void AnimationSynchronize(Animator animator)
+    {
+        animator.speed = speed / initializeSpeed;
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
@@ -46,6 +49,8 @@ public class SpeedManager : Singleton<SpeedManager>
         speed = 30f;
 
         initializeSpeed = speed;
+
+        runner = GameObject.Find("Runner").GetComponent<Runner>();
     }
 
     private void OnDisable()

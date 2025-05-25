@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public enum RoadLine
 {
@@ -24,7 +25,6 @@ public class Runner : MonoBehaviour
     [SerializeField] UnityEvent callback;
 
     [SerializeField] float positionX = 4f;
-
 
     private void OnEnable()
     {
@@ -83,11 +83,6 @@ public class Runner : MonoBehaviour
         );
     }
 
-    public void Synchronize()
-    {
-        animator.speed = SpeedManager.instance.Speed / SpeedManager.instance.InitializeSpeed;
-    }
-
     public void Execute()
     {
         animator.SetTrigger("Start");
@@ -98,6 +93,11 @@ public class Runner : MonoBehaviour
         animator.Play("Die");
 
         AudioManager.instance.Listen(audioClip);
+    }
+
+    public void Resume()
+    {
+        StartCoroutine(SceneryManager.instance.AsyncLoad(SceneManager.GetActiveScene().buildIndex));
     }
 
     private void OnTriggerEnter(Collider other)

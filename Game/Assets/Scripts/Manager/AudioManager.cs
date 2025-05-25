@@ -22,7 +22,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void ScenerySound(string name)
     {
-        scenerySource.clip = ResourcesManager.instance.Load<AudioClip>(name);
+        scenerySource.clip = Resources.Load<AudioClip>(name);
 
         scenerySource.Play();
     }

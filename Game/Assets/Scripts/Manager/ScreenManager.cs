@@ -1,36 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ScreenManager : MonoBehaviour
 {
+    [SerializeField] GameObject message;
     [SerializeField] GameObject startButton;
-    [SerializeField] GameObject resultScreen;
 
     private void OnEnable()
     {
         State.OnExecute += DisableButton;
+        State.OnFinish += GameEnd;
 
-        State.OnFinish += EnableScreen;
     }
 
     public void DisableButton()
     {
+        AudioManager.instance.ScenerySound("Execute");
+
         startButton.SetActive(false);
     }
 
-    public void EnableScreen()
+    public void GameEnd()
     {
-        resultScreen.SetActive(true);
+        message.gameObject.SetActive(true);
     }
 
     private void OnDisable()
     {
         State.OnExecute -= DisableButton;
-
-        State.OnFinish -= EnableScreen;
-
+        State.OnFinish -= GameEnd;
     }
-
 }

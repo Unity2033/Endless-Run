@@ -14,25 +14,25 @@ public class MouseManager :MonoBehaviour
 
     private void OnEnable()
     {
-        State.OnFinish += EnableMouse;
+        State.OnFinish += EnableMode;
 
-        State.OnExecute += DisableMouse;
+        State.OnExecute += DisableMode;
     }
 
     private void Start()
     {
-        EnableMouse();
+        EnableMode();
 
         Cursor.SetCursor(texture2D, Vector2.zero, CursorMode.ForceSoftware);
     }
 
-    public void DisableMouse()
+    public void DisableMode()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void EnableMouse()
+    public void EnableMode()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -40,8 +40,8 @@ public class MouseManager :MonoBehaviour
 
     private void OnDisable()
     {
-        State.OnFinish -= EnableMouse;
+        State.OnFinish -= EnableMode;
 
-        State.OnExecute += DisableMouse;
+        State.OnExecute += DisableMode;
     }
 }
