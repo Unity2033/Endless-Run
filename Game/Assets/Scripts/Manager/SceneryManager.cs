@@ -4,42 +4,27 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneryManager : Singleton<SceneryManager>
+public class SceneryManager : MonoBehaviour
 {
     [SerializeField] Image screenImage;
 
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        State.Subscribe(Condition.RESUME, Continue);
     }
 
-    public IEnumerator FadeIn()
+    void Continue()
     {
-        Color color = screenImage.color;
-
-        color.a = 1;
-
-        screenImage.gameObject.SetActive(true);
-
-        while (color.a >= 0.0f)
-        {
-            color.a -= Time.unscaledDeltaTime;
-
-            screenImage.color = color;
-
-            yield return null;
-        }
-
-        screenImage.gameObject.SetActive(false);
+        StartCoroutine(Coroutine());
     }
 
-    public IEnumerator AsyncLoad(int index)
+    public IEnumerator Coroutine()
     {
         screenImage.gameObject.SetActive(true);
 
         // <asyncOperation.allowSceneActivation>
         // 장면이 준비된 즉시 장면이 활성화되는 것을 허용하는 변수입니다.
-        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(index);
+        AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
 
         asyncOperation.allowSceneActivation = false;
 
@@ -75,13 +60,8 @@ public class SceneryManager : Singleton<SceneryManager>
         }
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        StartCoroutine(FadeIn());
-    }
-
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        State.Unsubscribe(Condition.RESUME, Continue);
     }
 }

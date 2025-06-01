@@ -14,9 +14,8 @@ public class MouseManager :MonoBehaviour
 
     private void OnEnable()
     {
-        State.OnFinish += EnableMode;
-
-        State.OnExecute += DisableMode;
+        State.Subscribe(Condition.START, DisableMode);
+        State.Subscribe(Condition.FINISH, EnableMode);
     }
 
     private void Start()
@@ -40,8 +39,7 @@ public class MouseManager :MonoBehaviour
 
     private void OnDisable()
     {
-        State.OnFinish -= EnableMode;
-
-        State.OnExecute += DisableMode;
+        State.Unsubscribe(Condition.START, DisableMode);
+        State.Unsubscribe(Condition.FINISH, EnableMode);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public enum RoadLine
@@ -20,17 +21,15 @@ public class Runner : MonoBehaviour
 
     [SerializeField] Rigidbody rigidBody;
 
-    [SerializeField] AudioClip audioClip;
-
-    [SerializeField] UnityEvent callback;
-
     [SerializeField] float positionX = 4f;
 
     private void OnEnable()
     {
-        State.OnFinish += Die;
+        State.Subscribe(Condition.FINISH, Die);
+        State.Subscribe(Condition.FINISH, Release);
 
-        State.OnExecute += Execute;
+        State.Subscribe(Condition.START, InputSystem);
+        State.Subscribe(Condition.START, StateTransition);
     }
 
     void Start()
@@ -38,52 +37,60 @@ public class Runner : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    IEnumerator Coroutine()
     {
-        if (State.Ready == false) return;
+        while (true)
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                if (roadLine != RoadLine.LEFT)
+                {
+                    roadLine--;
 
-        Keyboard();
+                    animator.Play("Left Avoid");
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                if (roadLine != RoadLine.RIGHT)
+                {
+                    roadLine++;
+
+                    animator.Play("Right Avoid");
+                }
+            }
+
+            yield return null;
+        }
+    }
+
+    public void InputSystem()
+    {
+        StartCoroutine(Coroutine());
+    }
+
+    public void Synchronize()
+    {
+        animator.speed = SpeedManager.instance.Speed / SpeedManager.instance.InitializeSpeed;
     }
 
     private void FixedUpdate()
     {
-        Move();
-    }
-
-    public void Keyboard()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (roadLine != RoadLine.LEFT)
-            {
-                roadLine--;
-
-                animator.Play("Left Avoid");
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (roadLine != RoadLine.RIGHT)
-            {
-                roadLine++;
-
-                animator.Play("Right Avoid");
-            }
-        }
-    }
-
-    private void Move()
-    {
         rigidBody.position = Vector3.Lerp
         (
-            rigidBody.position, 
+            rigidBody.position,
             new Vector3(positionX * (int)roadLine, 0, 0),
             SpeedManager.instance.Speed * Time.deltaTime
         );
     }
 
-    public void Execute()
+    void Release()
+    {
+        StopAllCoroutines();
+    }
+
+    public void StateTransition()
     {
         animator.SetTrigger("Start");
     }
@@ -92,12 +99,7 @@ public class Runner : MonoBehaviour
     {
         animator.Play("Die");
 
-        AudioManager.instance.Listen(audioClip);
-    }
-
-    public void Resume()
-    {
-        StartCoroutine(SceneryManager.instance.AsyncLoad(SceneManager.GetActiveScene().buildIndex));
+        AudioManager.instance.Listen("Conflict");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -106,14 +108,16 @@ public class Runner : MonoBehaviour
 
         if(collisionObject != null)
         {
-            callback.Invoke();
+            State.Publish(Condition.FINISH);
         }
     }
 
     private void OnDisable()
     {
-        State.OnFinish -= Die;
+        State.Unsubscribe(Condition.FINISH, Die);
+        State.Unsubscribe(Condition.FINISH, Release);
 
-        State.OnExecute -= Execute;
+        State.Unsubscribe(Condition.START, InputSystem);
+        State.Unsubscribe(Condition.START, StateTransition);
     }
 }

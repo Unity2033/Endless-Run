@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour, IHitable
 {
+    private void OnEnable()
+    {
+        State.Subscribe(Condition.FINISH, Release);
+    }
+
     public void Activate()
     {
         gameObject.SetActive(false);
@@ -11,8 +16,16 @@ public class Obstacle : MonoBehaviour, IHitable
 
     private void Update()
     {
-        if (State.Ready == false) return;
-
         transform.Translate(Vector3.back * SpeedManager.instance.Speed * Time.deltaTime);
+    }
+
+    void Release()
+    {
+        Destroy(this);
+    }
+
+    private void OnDisable()
+    {
+        State.Unsubscribe(Condition.FINISH, Release);
     }
 }

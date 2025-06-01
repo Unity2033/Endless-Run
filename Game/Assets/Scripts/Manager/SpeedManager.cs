@@ -11,9 +11,9 @@ public class SpeedManager : Singleton<SpeedManager>
 
     [SerializeField] float initializeSpeed;
 
-    [SerializeField] Runner runner;
-
     public float Speed { get { return speed; } }
+
+    public float InitializeSpeed { get { return initializeSpeed; } }
 
     public void Execute()
     {
@@ -22,40 +22,32 @@ public class SpeedManager : Singleton<SpeedManager>
 
     private void OnEnable()
     {
-        State.OnExecute += Execute;
+        State.Subscribe(Condition.START, Execute);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     IEnumerator Increase()
     {     
-        while (State.Ready && speed < limitSpeed)
+        while (speed < limitSpeed)
         {
-            yield return CoroutineCache.WaitForSecond(5.0f);
+            yield return CoroutineCache.WaitForSecond(0.533f);
 
-            speed += 2.5f;
-
-            AnimationSynchronize(runner.GetComponent<Animator>());
+            speed = speed + 0.5f;
         }
     }
 
-    public void AnimationSynchronize(Animator animator)
-    {
-        animator.speed = speed / initializeSpeed;
-    }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
         speed = 30f;
 
         initializeSpeed = speed;
-
-        runner = GameObject.Find("Runner").GetComponent<Runner>();
     }
 
     private void OnDisable()
     {
-        State.OnExecute -= Execute;
+        State.Unsubscribe(Condition.START, Execute);
 
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }

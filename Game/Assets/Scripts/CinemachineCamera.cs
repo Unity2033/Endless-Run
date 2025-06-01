@@ -11,9 +11,9 @@ public class CinemachineCamera : MonoBehaviour
 
     private void OnEnable()
     {
-        State.OnExecute += Follow;
+        State.Subscribe(Condition.START, Follow);
 
-        State.OnFinish += Observe;
+        State.Subscribe(Condition.FINISH, Observe);
     }
 
     public void Follow()
@@ -28,8 +28,8 @@ public class CinemachineCamera : MonoBehaviour
 
     private void OnDisable()
     {
-        State.OnExecute -= Follow;
+        State.Unsubscribe(Condition.START, Follow);
 
-        State.OnFinish -= Observe;
+        State.Unsubscribe(Condition.FINISH, Observe);
     }
 }

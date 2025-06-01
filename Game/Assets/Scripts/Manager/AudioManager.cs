@@ -15,9 +15,9 @@ public class AudioManager : Singleton<AudioManager>
         scenerySource.loop = true;
     }
 
-    public void Listen(AudioClip clip)
+    public void Listen(string name)
     {
-        effectSource.PlayOneShot(clip);
+        effectSource.PlayOneShot(Resources.Load<AudioClip>(name));
     }
 
     public void ScenerySound(string name)

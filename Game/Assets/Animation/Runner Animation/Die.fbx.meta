@@ -54,14 +54,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 1
-        functionName: Resume
-        data: 
-        objectReferenceParameter: {instanceID: 0}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -117,13 +110,13 @@ ModelImporter:
     serializedVersion: 3
     human: []
     skeleton:
-    - name: Student@Die(Clone)
+    - name: Die(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: mixamorig:Hips
-      parentName: Student@Die(Clone)
+      parentName: Die(Clone)
       position: {x: -0.00082862494, y: 0.7975775, z: -0.0006136203}
       rotation: {x: -0.0029536095, y: -0.0082623325, z: -0.0026281497, w: 0.9999581}
       scale: {x: 1, y: 1, z: 1}
@@ -545,7 +538,7 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     globalScale: 1
-    rootMotionBoneName: 
+    rootMotionBoneName: mixamorig:Hips
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1

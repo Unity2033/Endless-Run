@@ -10,22 +10,44 @@ public class TimeManager : MonoBehaviour
     [SerializeField] int second;
     [SerializeField] int milliseconds;
 
+    [SerializeField] float personalRecord;
+
     [SerializeField] Text timeText;
+    [SerializeField] Text fastestRunTime;
 
     private void OnEnable()
     {
-        State.OnExecute += Execute;
+        State.Subscribe(Condition.START, Execute);
+        State.Subscribe(Condition.FINISH, Release);
+        State.Subscribe(Condition.FINISH, RenewalTime);
+
     }
 
     public void Execute()
     {
-
         StartCoroutine(Measure());
+    }
+
+    void Release()
+    {
+        StopAllCoroutines();
+    }
+
+    public void RenewalTime()
+    {
+        if(PlayerPrefs.GetFloat("Time") < time)
+        {
+            PlayerPrefs.SetFloat("Time", time);
+        }
+
+        personalRecord = PlayerPrefs.GetFloat("Time");
+
+        fastestRunTime.text = "Fastest Run (" + string.Format("{0:D2} : {1:D2} : {2:D2}", (int)personalRecord / 60, (int)personalRecord % 60, (int)(personalRecord * 100) % 100) + ")";
     }
 
     IEnumerator Measure()
     {
-        while (State.Ready)
+        while (true)
         {
             time += Time.deltaTime;
 
@@ -41,6 +63,9 @@ public class TimeManager : MonoBehaviour
 
     private void OnDisable()
     {
-        State.OnExecute -= Execute;
+        State.Unsubscribe(Condition.START, Execute);
+        State.Unsubscribe(Condition.FINISH, Release);
+        State.Unsubscribe(Condition.FINISH, RenewalTime);
+
     }
 }

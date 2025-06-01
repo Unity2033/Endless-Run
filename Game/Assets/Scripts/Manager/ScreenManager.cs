@@ -4,31 +4,33 @@ using UnityEngine;
 
 public class ScreenManager : MonoBehaviour
 {
-    [SerializeField] GameObject message;
+    [SerializeField] GameObject timePanel;
+    [SerializeField] GameObject resultPanel;
     [SerializeField] GameObject startButton;
 
     private void OnEnable()
     {
-        State.OnExecute += DisableButton;
-        State.OnFinish += GameEnd;
-
+        State.Subscribe(Condition.START, ExecuteInterface);
+        State.Subscribe(Condition.FINISH, FinishInterface);
     }
 
-    public void DisableButton()
+    public void ExecuteInterface()
     {
-        AudioManager.instance.ScenerySound("Execute");
-
+        timePanel.SetActive(true);
         startButton.SetActive(false);
+
+        AudioManager.instance.ScenerySound("Execute");
     }
 
-    public void GameEnd()
+    public void FinishInterface()
     {
-        message.gameObject.SetActive(true);
+        timePanel.SetActive(false);
+        resultPanel.SetActive(true);
     }
 
-    private void OnDisable()
+    public void OnDisable()
     {
-        State.OnExecute -= DisableButton;
-        State.OnFinish -= GameEnd;
+        State.Unsubscribe(Condition.START, ExecuteInterface);
+        State.Unsubscribe(Condition.FINISH, FinishInterface);
     }
 }

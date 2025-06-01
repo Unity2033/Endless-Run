@@ -13,12 +13,13 @@ public class ObstacleManager : MonoBehaviour
     [SerializeField] int createCount = 5;
 
     [SerializeField] float comeOutTime = 2.0f;
-    [SerializeField] float decreaseRate = 0.95f;
+    [SerializeField] float decreaseRate = 0.9625f;
 
 
     private void OnEnable()
     {
-        State.OnExecute += Execute;
+        State.Subscribe(Condition.START, Execute);
+        State.Subscribe(Condition.FINISH, Release);
     }
 
     void Start()
@@ -54,7 +55,7 @@ public class ObstacleManager : MonoBehaviour
 
     public IEnumerator ActiveObstacle()
     {
-        while (State.Ready)
+        while (true)
         {
             random = Random.Range(0, obstacles.Count);
 
@@ -89,8 +90,15 @@ public class ObstacleManager : MonoBehaviour
         StartCoroutine(ActiveObstacle());
     }
 
+    void Release()
+    {
+        StopAllCoroutines();
+    }
+
     private void OnDisable()
-    {   
-        State.OnExecute -= Execute;
+    {
+        State.Unsubscribe(Condition.START, Execute);
+        State.Unsubscribe(Condition.FINISH, Release);
+
     }
 }

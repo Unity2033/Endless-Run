@@ -1,21 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public void Execute()
     {
-        State.Ready = true;
+        State.Publish(Condition.START);
 
-        State.OnExecute?.Invoke();
+        AudioManager.instance.Listen("Start Button");
     }
 
-    public void Finish()
+    public void Resume()
     {
-        State.Ready = false;
+        State.Publish(Condition.RESUME);
 
-        State.OnFinish?.Invoke();
+        AudioManager.instance.Listen("Continue Button");
     }
+
 }
