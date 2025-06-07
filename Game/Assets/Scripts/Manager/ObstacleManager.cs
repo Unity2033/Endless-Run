@@ -12,8 +12,7 @@ public class ObstacleManager : MonoBehaviour
     [SerializeField] int random;
     [SerializeField] int createCount = 5;
 
-    [SerializeField] float comeOutTime = 2.0f;
-    [SerializeField] float decreaseRate = 0.9625f;
+    [SerializeField] float obstacleDelay = 1.0f;
 
 
     private void OnEnable()
@@ -79,9 +78,9 @@ public class ObstacleManager : MonoBehaviour
 
             obstacles[random].SetActive(true);
 
-            yield return CoroutineCache.WaitForSecond(comeOutTime);
+            yield return CoroutineCache.WaitForSecond(obstacleDelay);
 
-            comeOutTime = Mathf.Max(0.125f, comeOutTime * decreaseRate);
+            obstacleDelay = Mathf.Max(0.125f, obstacleDelay - 0.025f);
         }
     }
 

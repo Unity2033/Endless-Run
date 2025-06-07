@@ -4,9 +4,25 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour, IHitable
 {
+    [SerializeField] Animator animator;
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     private void OnEnable()
     {
         State.Subscribe(Condition.FINISH, Release);
+    }
+
+    public void CollisionAnimation()
+    {
+        animator.enabled = true;
+
+        transform.position = new Vector3 (transform.position.x, 0.5f, transform.position.z);
+
+        animator.speed = SpeedManager.instance.Speed / SpeedManager.instance.InitializeSpeed;
     }
 
     public void Activate()

@@ -15,16 +15,17 @@ public class SpeedManager : Singleton<SpeedManager>
 
     public float InitializeSpeed { get { return initializeSpeed; } }
 
-    public void Execute()
-    {
-        StartCoroutine(Increase());
-    }
-
     private void OnEnable()
     {
         State.Subscribe(Condition.START, Execute);
+        State.Subscribe(Condition.FINISH, Release);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    public void Execute()
+    {
+        StartCoroutine(Increase());
     }
 
     IEnumerator Increase()
@@ -37,6 +38,10 @@ public class SpeedManager : Singleton<SpeedManager>
         }
     }
 
+    void Release()
+    {
+        StopAllCoroutines();
+    }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
     {
@@ -48,6 +53,7 @@ public class SpeedManager : Singleton<SpeedManager>
     private void OnDisable()
     {
         State.Unsubscribe(Condition.START, Execute);
+        State.Unsubscribe(Condition.FINISH, Release);
 
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }

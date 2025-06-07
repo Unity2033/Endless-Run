@@ -1,0 +1,138 @@
+﻿#include "pch-c.h"
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+extern void InputSystemProvider__cctor_m1B2BFA7F3942CE7D68EEC2A06652C6C735660EF4 (void);
+extern void InputSystemProvider_Bootstrap_mF57FB7E3DF3C1AB59A2D4822BEC6ECEEA8C0FC59 (void);
+extern void InputSystemProvider_get_m_EventModifiers_m2D14FEBCDB24DF81613022ED674A7B8FD1E23484 (void);
+extern void InputSystemProvider_get_m_CurrentTime_mEC00F1D194C2785A275C34A5E895CBEEC6414E2B (void);
+extern void InputSystemProvider_Initialize_m2257351EFB8F3FBDED366E16132C5F1E6021991D (void);
+extern void InputSystemProvider_Shutdown_m774496048F3226A9D191A325861C32A40E4A8F9B (void);
+extern void InputSystemProvider_Update_m91A0AF7C15FAC8BBEC39294F72F0B81F189FA7BC (void);
+extern void InputSystemProvider_ResetSeenEvents_mBA2D49FDFCD954E16BCBDE0BC13531D13931C6A6 (void);
+extern void InputSystemProvider_DirectionNavigation_m290A765306EB534FFFBB734A7A8B0618DC6F107C (void);
+extern void InputSystemProvider_GetActiveDeviceFromDirection_m60315AA9FD16AC1763248E6DA1CB3DD093405426 (void);
+extern void InputSystemProvider_ReadCurrentNavigationMoveVector_mC3B2CA0A67F54365FDB7D55CA32947DC4EA727B6 (void);
+extern void InputSystemProvider_ReadNextPreviousDirection_m2E81D119E980821A588FEC0DF01D6D2120D5A481 (void);
+extern void InputSystemProvider_SortEvents_m30A8CD28CC0393BE86AE3BAE512B8B2C68448252 (void);
+extern void InputSystemProvider_OnFocusChanged_m26E57523E8B8B5B625533FED0B3B78F073666D26 (void);
+extern void InputSystemProvider_ScreenBottomLeftToPanelPosition_m308B3B69392686A03D43F0092A559C9A365A1B5F (void);
+extern void InputSystemProvider_GetEventSource_m63A170F8A9B01B53E16BBDF00C2919ACBB473765 (void);
+extern void InputSystemProvider_GetEventSource_mCE28EEE24E33E04390982A31592F76AB42D4C0EA (void);
+extern void InputSystemProvider_GetPointerStateForSource_m10B409854E888648AE86BD385E498515DA0DE8B7 (void);
+extern void InputSystemProvider_DispatchFromCallback_m3B6238DF04753B58C9005FD658B5B9EAAE3DF87A (void);
+extern void InputSystemProvider_FindTouchFingerIndex_mF6B6A37B84D05445187D5550AA58484009E8611B (void);
+extern void InputSystemProvider_OnPointerPerformed_mC2615075065F581DD5903E70D1C7C5CA60C977F1 (void);
+extern void InputSystemProvider_OnSubmitPerformed_m626FFC8C2D3EA58DB24A502125343EFB72ED8136 (void);
+extern void InputSystemProvider_OnCancelPerformed_m6CD136D033D02D10BF6589916600D9C3FC5A36E7 (void);
+extern void InputSystemProvider_OnClickPerformed_m8E3EA594835C13FE18DB760C19FFF4F95740D30D (void);
+extern void InputSystemProvider_OnLeftClickPerformed_m12607F9F13113D2A7B1C98734BADF632EBA18A86 (void);
+extern void InputSystemProvider_OnMiddleClickPerformed_mC7C847FFBA54F1659CEF10FC55CD1D39B94FBCFA (void);
+extern void InputSystemProvider_OnRightClickPerformed_m95A053882BE8785111FC672337DC11782F87AA82 (void);
+extern void InputSystemProvider_OnScrollWheelPerformed_mEA2FBB206D964015CCF762FA2BC8C75193F88E36 (void);
+extern void InputSystemProvider_RegisterNextPreviousAction_m9C288F910FA0857BE2DFE70F6A1BFFF7EBDEBC96 (void);
+extern void InputSystemProvider_UnregisterNextPreviousAction_mE13130E9A7141D4116878DBEA9B6B03573F82F3E (void);
+extern void InputSystemProvider_RegisterActions_m8A8443BFD08916D9A462F4174E7FFC6807C88CE3 (void);
+extern void InputSystemProvider_UnregisterActions_mA92973E00A7DB5D994FF99B551173E8C33F1F08A (void);
+extern void InputSystemProvider__ctor_mAD0ACD0FD13335A66C2F60AA9D5DAFD7D9C5775E (void);
+extern void Configuration_GetDefaultConfiguration_mCCD1D4F2E90269D96B8694DF0A984AF7A5DAED15 (void);
+static Il2CppMethodPointer s_methodPointers[34] = 
+{
+	InputSystemProvider__cctor_m1B2BFA7F3942CE7D68EEC2A06652C6C735660EF4,
+	InputSystemProvider_Bootstrap_mF57FB7E3DF3C1AB59A2D4822BEC6ECEEA8C0FC59,
+	InputSystemProvider_get_m_EventModifiers_m2D14FEBCDB24DF81613022ED674A7B8FD1E23484,
+	InputSystemProvider_get_m_CurrentTime_mEC00F1D194C2785A275C34A5E895CBEEC6414E2B,
+	InputSystemProvider_Initialize_m2257351EFB8F3FBDED366E16132C5F1E6021991D,
+	InputSystemProvider_Shutdown_m774496048F3226A9D191A325861C32A40E4A8F9B,
+	InputSystemProvider_Update_m91A0AF7C15FAC8BBEC39294F72F0B81F189FA7BC,
+	InputSystemProvider_ResetSeenEvents_mBA2D49FDFCD954E16BCBDE0BC13531D13931C6A6,
+	InputSystemProvider_DirectionNavigation_m290A765306EB534FFFBB734A7A8B0618DC6F107C,
+	InputSystemProvider_GetActiveDeviceFromDirection_m60315AA9FD16AC1763248E6DA1CB3DD093405426,
+	InputSystemProvider_ReadCurrentNavigationMoveVector_mC3B2CA0A67F54365FDB7D55CA32947DC4EA727B6,
+	InputSystemProvider_ReadNextPreviousDirection_m2E81D119E980821A588FEC0DF01D6D2120D5A481,
+	InputSystemProvider_SortEvents_m30A8CD28CC0393BE86AE3BAE512B8B2C68448252,
+	InputSystemProvider_OnFocusChanged_m26E57523E8B8B5B625533FED0B3B78F073666D26,
+	InputSystemProvider_ScreenBottomLeftToPanelPosition_m308B3B69392686A03D43F0092A559C9A365A1B5F,
+	InputSystemProvider_GetEventSource_m63A170F8A9B01B53E16BBDF00C2919ACBB473765,
+	InputSystemProvider_GetEventSource_mCE28EEE24E33E04390982A31592F76AB42D4C0EA,
+	InputSystemProvider_GetPointerStateForSource_m10B409854E888648AE86BD385E498515DA0DE8B7,
+	InputSystemProvider_DispatchFromCallback_m3B6238DF04753B58C9005FD658B5B9EAAE3DF87A,
+	InputSystemProvider_FindTouchFingerIndex_mF6B6A37B84D05445187D5550AA58484009E8611B,
+	InputSystemProvider_OnPointerPerformed_mC2615075065F581DD5903E70D1C7C5CA60C977F1,
+	InputSystemProvider_OnSubmitPerformed_m626FFC8C2D3EA58DB24A502125343EFB72ED8136,
+	InputSystemProvider_OnCancelPerformed_m6CD136D033D02D10BF6589916600D9C3FC5A36E7,
+	InputSystemProvider_OnClickPerformed_m8E3EA594835C13FE18DB760C19FFF4F95740D30D,
+	InputSystemProvider_OnLeftClickPerformed_m12607F9F13113D2A7B1C98734BADF632EBA18A86,
+	InputSystemProvider_OnMiddleClickPerformed_mC7C847FFBA54F1659CEF10FC55CD1D39B94FBCFA,
+	InputSystemProvider_OnRightClickPerformed_m95A053882BE8785111FC672337DC11782F87AA82,
+	InputSystemProvider_OnScrollWheelPerformed_mEA2FBB206D964015CCF762FA2BC8C75193F88E36,
+	InputSystemProvider_RegisterNextPreviousAction_m9C288F910FA0857BE2DFE70F6A1BFFF7EBDEBC96,
+	InputSystemProvider_UnregisterNextPreviousAction_mE13130E9A7141D4116878DBEA9B6B03573F82F3E,
+	InputSystemProvider_RegisterActions_m8A8443BFD08916D9A462F4174E7FFC6807C88CE3,
+	InputSystemProvider_UnregisterActions_mA92973E00A7DB5D994FF99B551173E8C33F1F08A,
+	InputSystemProvider__ctor_mAD0ACD0FD13335A66C2F60AA9D5DAFD7D9C5775E,
+	Configuration_GetDefaultConfiguration_mCCD1D4F2E90269D96B8694DF0A984AF7A5DAED15,
+};
+static const int32_t s_InvokerIndices[34] = 
+{
+	10942,
+	10942,
+	7504,
+	7494,
+	7725,
+	7725,
+	7725,
+	7725,
+	5997,
+	5222,
+	7448,
+	7548,
+	9638,
+	5966,
+	9862,
+	5045,
+	4897,
+	3709,
+	5948,
+	9654,
+	6262,
+	6262,
+	6262,
+	1582,
+	6262,
+	6262,
+	6262,
+	6262,
+	7725,
+	7725,
+	6289,
+	6289,
+	7725,
+	10952,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_Unity_InputSystem_ForUI_CodeGenModule;
+const Il2CppCodeGenModule g_Unity_InputSystem_ForUI_CodeGenModule = 
+{
+	"Unity.InputSystem.ForUI.dll",
+	34,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};

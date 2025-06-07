@@ -108,6 +108,8 @@ public class Runner : MonoBehaviour
 
         if(collisionObject != null)
         {
+            collisionObject.CollisionAnimation();
+
             State.Publish(Condition.FINISH);
         }
     }

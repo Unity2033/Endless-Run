@@ -13,6 +13,7 @@ public class TimeManager : MonoBehaviour
     [SerializeField] float personalRecord;
 
     [SerializeField] Text timeText;
+    [SerializeField] Text latestRunTime;
     [SerializeField] Text fastestRunTime;
 
     private void OnEnable()
@@ -38,10 +39,13 @@ public class TimeManager : MonoBehaviour
         if(PlayerPrefs.GetFloat("Time") < time)
         {
             PlayerPrefs.SetFloat("Time", time);
+
+            PlayerPrefs.Save();
         }
 
         personalRecord = PlayerPrefs.GetFloat("Time");
 
+        latestRunTime.text = "Latest Run   (" + string.Format("{0:D2} : {1:D2} : {2:D2}", (int)time / 60, (int)time % 60, (int)(time * 100) % 100) + ")";
         fastestRunTime.text = "Fastest Run (" + string.Format("{0:D2} : {1:D2} : {2:D2}", (int)personalRecord / 60, (int)personalRecord % 60, (int)(personalRecord * 100) % 100) + ")";
     }
 
