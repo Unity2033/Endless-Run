@@ -6,7 +6,6 @@ public class ScreenManager : MonoBehaviour
 {
     [SerializeField] GameObject timePanel;
     [SerializeField] GameObject resultPanel;
-    [SerializeField] GameObject initializePanel;
 
     private void OnEnable()
     {
@@ -17,7 +16,6 @@ public class ScreenManager : MonoBehaviour
     public void ExecuteInterface()
     {
         timePanel.SetActive(true);
-        initializePanel.SetActive(false);
 
         AudioManager.instance.ScenerySound("Execute");
     }

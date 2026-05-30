@@ -23,13 +23,16 @@ public class Runner : MonoBehaviour
 
     [SerializeField] float positionX = 4f;
 
+    [SerializeField] float factor = 10.0f;
+
+    [SerializeField] RoadLine previousLine;
+
     private void OnEnable()
     {
         State.Subscribe(Condition.FINISH, Die);
         State.Subscribe(Condition.FINISH, Release);
 
         State.Subscribe(Condition.START, InputSystem);
-        State.Subscribe(Condition.START, StateTransition);
     }
 
     void Start()
@@ -45,9 +48,9 @@ public class Runner : MonoBehaviour
             {
                 if (roadLine != RoadLine.LEFT)
                 {
-                    roadLine--;
+                    previousLine = roadLine;
 
-                    animator.Play("Left Avoid");
+                    roadLine--;
                 }
             }
 
@@ -55,9 +58,9 @@ public class Runner : MonoBehaviour
             {
                 if (roadLine != RoadLine.RIGHT)
                 {
-                    roadLine++;
+                    previousLine = roadLine;
 
-                    animator.Play("Right Avoid");
+                    roadLine++;
                 }
             }
 
@@ -77,22 +80,14 @@ public class Runner : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rigidBody.position = Vector3.Lerp
-        (
-            rigidBody.position,
-            new Vector3(positionX * (int)roadLine, 0, 0),
-            SpeedManager.instance.Speed * Time.deltaTime
-        );
+        Vector3 nextPosition = new Vector3(positionX * (int)roadLine, rigidBody.position.y, rigidBody.position.z);
+
+        rigidBody.linearVelocity = (nextPosition - rigidBody.position) * factor;
     }
 
     void Release()
     {
         StopAllCoroutines();
-    }
-
-    public void StateTransition()
-    {
-        animator.SetTrigger("Start");
     }
 
     public void Die()
@@ -102,15 +97,24 @@ public class Runner : MonoBehaviour
         AudioManager.instance.Listen("Conflict");
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnCollisionEnter(Collision collision)
     {
-        Obstacle collisionObject = other.GetComponent<Obstacle>();
+        Vector3 normal = collision.contacts[0].normal;
 
-        if(collisionObject != null)
+        float dot = Vector3.Dot(transform.forward, -normal);
+
+        Obstacle collisionObject = collision.gameObject.GetComponent<Obstacle>();
+
+        if (collisionObject != null)
         {
-            collisionObject.CollisionAnimation();
-
-            State.Publish(Condition.FINISH);
+            if (dot > 0.7f)
+            {
+                State.Publish(Condition.FINISH);
+            }
+            else
+            {
+                roadLine = previousLine;
+            }
         }
     }
 
@@ -120,6 +124,5 @@ public class Runner : MonoBehaviour
         State.Unsubscribe(Condition.FINISH, Release);
 
         State.Unsubscribe(Condition.START, InputSystem);
-        State.Unsubscribe(Condition.START, StateTransition);
     }
 }
