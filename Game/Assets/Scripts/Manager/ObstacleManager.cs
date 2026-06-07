@@ -12,9 +12,6 @@ public class ObstacleManager : MonoBehaviour
     [SerializeField] int random;
     [SerializeField] int createCount = 5;
 
-    [SerializeField] float obstacleDelay = 1.0f;
-
-
     private void OnEnable()
     {
         State.Subscribe(Condition.START, Execute);
@@ -23,8 +20,6 @@ public class ObstacleManager : MonoBehaviour
 
     void Start()
     {
-        obstacles.Capacity = 10;
-
         Create();
     }
 
@@ -78,9 +73,10 @@ public class ObstacleManager : MonoBehaviour
 
             obstacles[random].SetActive(true);
 
-            yield return CoroutineCache.WaitForSecond(obstacleDelay);
 
-            obstacleDelay = Mathf.Max(0.125f, obstacleDelay - 0.025f);
+            float ratio = (GameManager.Instance.Speed - GameManager.Instance.InitializeSpeed) / (60f - GameManager.Instance.InitializeSpeed);
+
+            yield return CoroutineCache.WaitForSecond(Mathf.Lerp(1.0f, 0.3f, ratio));
         }
     }
 

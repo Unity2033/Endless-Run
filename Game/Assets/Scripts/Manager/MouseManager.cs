@@ -3,14 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MouseManager :MonoBehaviour
+public class MouseManager : Singleton<MouseManager>
 {
     [SerializeField] Texture2D texture2D;
-
-    void Awake()
-    {
-        texture2D = Resources.Load<Texture2D>("Default");
-    }
 
     private void OnEnable()
     {
@@ -20,6 +15,8 @@ public class MouseManager :MonoBehaviour
 
     private void Start()
     {
+        texture2D = Resources.Load<Texture2D>("Default");
+
         EnableMode();
 
         Cursor.SetCursor(texture2D, Vector2.zero, CursorMode.ForceSoftware);
