@@ -74,7 +74,7 @@ public class ObstacleManager : MonoBehaviour
             obstacles[random].SetActive(true);
 
 
-            float ratio = (GameManager.Instance.Speed - GameManager.Instance.InitializeSpeed) / (60f - GameManager.Instance.InitializeSpeed);
+            float ratio = (GameManager.instance.Speed - GameManager.instance.InitializeSpeed) / (60f - GameManager.instance.InitializeSpeed);
 
             yield return CoroutineCache.WaitForSecond(Mathf.Lerp(1.0f, 0.3f, ratio));
         }

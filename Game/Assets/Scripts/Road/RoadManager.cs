@@ -30,7 +30,7 @@ public class RoadManager : MonoBehaviour
         {
             for (int i = 0; i < roads.Count; i++)
             {
-                roads[i].transform.Translate(Vector3.back * GameManager.Instance.Speed * Time.deltaTime);
+                roads[i].transform.Translate(Vector3.back * GameManager.instance.Speed * Time.deltaTime);
             }
 
             yield return null;

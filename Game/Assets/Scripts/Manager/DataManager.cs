@@ -1,20 +1,33 @@
 using UnityEngine;
+using TMPro;
 
 public class DataManager : Singleton<DataManager>
 {
-    [SerializeField] int distance;
+    [SerializeField] float record;
+    [SerializeField] TextMeshProUGUI maximumDistanceText;
 
-    public void Save()
+    private void Start()
     {
-        PlayerPrefs.SetInt("Distance", distance);
+        Load();
+    }
 
-        PlayerPrefs.Save();
+    public void SetScore(float distance)
+    {
+        if (record < distance)
+        {
+            record = distance;
+
+            PlayerPrefs.SetFloat("Distance", record);
+
+            PlayerPrefs.Save();
+
+        }
     }
 
     public void Load()
     {
-        distance = PlayerPrefs.GetInt("Distance");
+        record = PlayerPrefs.GetFloat("Distance");
+
+        maximumDistanceText.text = $"Maximum Distance : {record:F0}m";
     }
-
-
 }

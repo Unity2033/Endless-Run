@@ -70,7 +70,7 @@ public class Runner : MonoBehaviour
 
     public void Synchronize()
     {
-        animator.speed = GameManager.Instance.Speed / GameManager.Instance.InitializeSpeed;
+        animator.speed = GameManager.instance.Speed / GameManager.instance.InitializeSpeed;
     }
 
     private void FixedUpdate()
