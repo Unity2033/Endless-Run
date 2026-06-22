@@ -11,27 +11,14 @@ public class DistanceManager : MonoBehaviour
 
     float distance;
 
-    private void OnEnable()
-    {
-        State.Subscribe(Condition.START, Execute);
-        State.Subscribe(Condition.FINISH, Release);
-    }
-
     public void Execute()
     {
         StartCoroutine(Increase());
     }
 
-    void Release()
-    {
-        DataManager.instance.SetScore(distance);
-
-        StopAllCoroutines();
-    }
-
     private IEnumerator Increase()
     {
-        while(true)
+        while(GameManager.instance.State)
         {
             distance += pace * Time.deltaTime;
 
@@ -39,12 +26,7 @@ public class DistanceManager : MonoBehaviour
 
             yield return null;
         }
-    }
 
-
-    private void OnDisable()
-    {
-        State.Unsubscribe(Condition.START, Execute);
-        State.Unsubscribe(Condition.FINISH, Release);
+        DataManager.instance.Save(distance);
     }
 }

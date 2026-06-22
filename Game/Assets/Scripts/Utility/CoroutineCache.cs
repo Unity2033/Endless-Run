@@ -4,20 +4,7 @@ using UnityEngine;
 
 public class CoroutineCache
 {
-    class Compare : IEqualityComparer<float>
-    {
-        public bool Equals(float x, float y)
-        {
-            return x == y;
-        }
-
-        public int GetHashCode(float hash)
-        {
-            return hash.GetHashCode();
-        }
-    }
-
-    static readonly Dictionary<float, WaitForSeconds> dictionary = new Dictionary<float, WaitForSeconds>(new Compare());
+    static readonly Dictionary<float, WaitForSeconds> dictionary = new();
 
     public static WaitForSeconds WaitForSecond(float time)
     {

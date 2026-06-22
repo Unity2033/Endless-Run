@@ -17,12 +17,12 @@ public class AudioManager : Singleton<AudioManager>
 
     public void Listen(string name)
     {
-        effectSource.PlayOneShot(Resources.Load<AudioClip>(name));
+        effectSource.PlayOneShot(Resources.Load<AudioClip>("Audios/" + name));
     }
 
     public void ScenerySound(string name)
     {
-        scenerySource.clip = Resources.Load<AudioClip>(name);
+        scenerySource.clip = Resources.Load<AudioClip>("Audios/" + name);
 
         scenerySource.Play();
     }

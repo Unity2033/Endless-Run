@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Road : MonoBehaviour, IHitable
+public class Road : MonoBehaviour
 {
     [SerializeField] UnityEvent callback;
 
-    public void Activate()
+    private void OnTriggerEnter(Collider other)
     {
-        if (callback != null)
+        if (other.CompareTag("Interact Zone"))
         {
-            callback.Invoke();
+            if (callback != null)
+            {
+                callback.Invoke();
+            }
         }
     }
 }

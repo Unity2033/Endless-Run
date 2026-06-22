@@ -1,18 +1,13 @@
-using System.Collections;
 using UnityEngine;
-
-public enum RoadLine
-{
-    LEFT = -1,
-    MIDDLE = 0,
-    RIGHT = 1
-}
+using UnityEngine.SceneManagement;
 
 public class Runner : MonoBehaviour
 {
     [SerializeField] Animator animator;
 
-    [SerializeField] RoadLine roadLine;
+    [SerializeField] Line roadLine;
+
+    [SerializeField] Line previousLine;
 
     [SerializeField] Rigidbody rigidBody;
 
@@ -20,56 +15,42 @@ public class Runner : MonoBehaviour
 
     [SerializeField] float factor = 10.0f;
 
-    [SerializeField] RoadLine previousLine;
-
-    private void OnEnable()
-    {
-        State.Subscribe(Condition.FINISH, Die);
-        State.Subscribe(Condition.FINISH, Release);
-
-        State.Subscribe(Condition.START, InputSystem);
-    }
+    [SerializeField] ScreenManager screenManager;
 
     void Start()
     {  
         rigidBody = GetComponent<Rigidbody>();
     }
 
-    IEnumerator Coroutine()
+    private void Update()
     {
-        while (true)
+        if (GameManager.instance.State == false) return;
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            if (roadLine != Line.LEFT)
             {
-                if (roadLine != RoadLine.LEFT)
-                {
-                    previousLine = roadLine;
+                previousLine = roadLine;
 
-                    roadLine--;
-                }
+                roadLine--;
             }
-
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                if (roadLine != RoadLine.RIGHT)
-                {
-                    previousLine = roadLine;
-
-                    roadLine++;
-                }
-            }
-
-            yield return null;
         }
-    }
 
-    public void InputSystem()
-    {
-        StartCoroutine(Coroutine());
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            if (roadLine != Line.RIGHT)
+            {
+                previousLine = roadLine;
+
+                roadLine++;
+            }
+        }
     }
 
     public void Synchronize()
     {
+        GameManager.instance.Increase();
+
         animator.speed = GameManager.instance.Speed / GameManager.instance.InitializeSpeed;
     }
 
@@ -80,16 +61,30 @@ public class Runner : MonoBehaviour
         rigidBody.linearVelocity = (nextPosition - rigidBody.position) * factor;
     }
 
-    void Release()
-    {
-        StopAllCoroutines();
-    }
-
     public void Die()
     {
         animator.Play("Die");
 
+        animator.speed = 1.0f;
+
+        screenManager.FadeIn();
+
+        GameManager.instance.State = false;
+
         AudioManager.instance.Listen("Conflict");
+    }
+
+    public void Resume()
+    {
+        GameManager.instance.Resume();
+    }
+
+    public void Reset()
+    {
+        roadLine = Line.MIDDLE;
+        previousLine = Line.MIDDLE;
+
+        animator.Play("Idle");
     }
 
     void OnCollisionEnter(Collision collision)
@@ -104,7 +99,7 @@ public class Runner : MonoBehaviour
         {
             if (dot > 0.7f)
             {
-                State.Publish(Condition.FINISH);
+                Die();
             }
             else
             {
@@ -113,13 +108,5 @@ public class Runner : MonoBehaviour
                 AudioManager.instance.Listen("Collision");
             }
         }
-    }
-
-    private void OnDisable()
-    {
-        State.Unsubscribe(Condition.FINISH, Die);
-        State.Unsubscribe(Condition.FINISH, Release);
-
-        State.Unsubscribe(Condition.START, InputSystem);
     }
 }

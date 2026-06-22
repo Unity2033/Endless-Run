@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager>
 {
+    [SerializeField] bool state;
+
     [SerializeField] float speed = 30.0f;
-    [SerializeField] float limitSpeed = 60.0f;
 
     [SerializeField] float initializeSpeed;
 
@@ -12,40 +15,30 @@ public class GameManager : Singleton<GameManager>
 
     public float InitializeSpeed { get { return initializeSpeed; } }
 
-    private void OnEnable()
+    public bool State { get { return state; } set { state = value; } }
+
+    [SerializeField] UnityEvent callback;
+
+    private void Start()
     {
-        State.Subscribe(Condition.START, Execute);
-        State.Subscribe(Condition.FINISH, Release);
+        initializeSpeed = speed;
+    }
+
+    public void Resume()
+    {
+        if(callback != null)
+        {
+            callback.Invoke();
+        }
     }
 
     public void Lanuch()
     {
-        State.Publish(Condition.START);
+        State = true;
     }
 
-    public void Execute()
+    public void Increase()
     {
-        StartCoroutine(Increase());
-    }
-
-    IEnumerator Increase()
-    {     
-        while (speed < limitSpeed)
-        {
-            yield return CoroutineCache.WaitForSecond(0.533f);
-            
-            speed = speed + 0.5f;
-        }
-    }
-
-    void Release()
-    {
-        StopAllCoroutines();
-    }
-
-    private void OnDisable()
-    {
-        State.Unsubscribe(Condition.START, Execute);
-        State.Unsubscribe(Condition.FINISH, Release);
+        speed += 0.5f / (1 + speed * 0.02f);
     }
 }

@@ -2,30 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Obstacle : MonoBehaviour, IHitable
+public class Obstacle : MonoBehaviour
 {
-    private void OnEnable()
-    {
-        State.Subscribe(Condition.FINISH, Release);
-    }
-
-    public void Activate()
-    {
-        gameObject.SetActive(false);
-    }
+    [SerializeField] float speed = 0.0f;
 
     private void Update()
     {
+        if (GameManager.instance.State == false) return;
+
         transform.Translate(Vector3.forward * GameManager.instance.Speed * Time.deltaTime);
     }
 
-    void Release()
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(this);
-    }
-
-    private void OnDisable()
-    {
-        State.Unsubscribe(Condition.FINISH, Release);
+        if(other.CompareTag("Interact Zone"))
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

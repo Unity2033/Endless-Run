@@ -12,12 +12,6 @@ public class ObstacleManager : MonoBehaviour
     [SerializeField] int random;
     [SerializeField] int createCount = 5;
 
-    private void OnEnable()
-    {
-        State.Subscribe(Condition.START, Execute);
-        State.Subscribe(Condition.FINISH, Release);
-    }
-
     void Start()
     {
         Create();
@@ -25,7 +19,7 @@ public class ObstacleManager : MonoBehaviour
 
     public void Create()
     {
-        GameObject clone = Instantiate(Resources.Load<GameObject>(obstacleNames[Random.Range(0, obstacleNames.Count)]), transform);
+        GameObject clone = Instantiate(Resources.Load<GameObject>("Prefabs/" + obstacleNames[Random.Range(0, obstacleNames.Count)]), transform);
 
         clone.name = clone.name.Replace("(Clone)", "");
 
@@ -49,7 +43,7 @@ public class ObstacleManager : MonoBehaviour
 
     public IEnumerator ActiveObstacle()
     {
-        while (true)
+        while (GameManager.instance.State)
         {
             random = Random.Range(0, obstacles.Count);
 
@@ -80,20 +74,17 @@ public class ObstacleManager : MonoBehaviour
         }
     }
 
+    public void Deactivate()
+    {
+        for (int i = 0; i < obstacles.Count; i++)
+        {
+            obstacles[i].gameObject.SetActive(false);
+        }
+    }
+
+
     public void Execute()
     {
         StartCoroutine(ActiveObstacle());
-    }
-
-    void Release()
-    {
-        StopAllCoroutines();
-    }
-
-    private void OnDisable()
-    {
-        State.Unsubscribe(Condition.START, Execute);
-        State.Unsubscribe(Condition.FINISH, Release);
-
     }
 }

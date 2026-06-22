@@ -7,15 +7,9 @@ public class MouseManager : Singleton<MouseManager>
 {
     [SerializeField] Texture2D texture2D;
 
-    private void OnEnable()
-    {
-        State.Subscribe(Condition.START, DisableMode);
-        State.Subscribe(Condition.FINISH, EnableMode);
-    }
-
     private void Start()
     {
-        texture2D = Resources.Load<Texture2D>("Default");
+        texture2D = Resources.Load<Texture2D>("Sprites/Default");
 
         EnableMode();
 
@@ -34,9 +28,4 @@ public class MouseManager : Singleton<MouseManager>
         Cursor.lockState = CursorLockMode.None;
     }
 
-    private void OnDisable()
-    {
-        State.Unsubscribe(Condition.START, DisableMode);
-        State.Unsubscribe(Condition.FINISH, EnableMode);
-    }
 }

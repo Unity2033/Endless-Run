@@ -11,7 +11,7 @@ public class DataManager : Singleton<DataManager>
         Load();
     }
 
-    public void SetScore(float distance)
+    public void Save(float distance)
     {
         if (record < distance)
         {
@@ -20,7 +20,6 @@ public class DataManager : Singleton<DataManager>
             PlayerPrefs.SetFloat("Distance", record);
 
             PlayerPrefs.Save();
-
         }
     }
 
