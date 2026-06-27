@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class ObstacleManager : MonoBehaviour
 {
+    private Coroutine coroutine;
+
+    [SerializeField] int createCount = 5;
+
     [SerializeField] Transform[] transforms;
-    [SerializeField] List<GameObject> obstacles;
 
     [SerializeField] List<string> obstacleNames;
 
-    [SerializeField] int random;
-    [SerializeField] int createCount = 5;
+    [SerializeField] Queue<GameObject> obstacles = new();
+
 
     void Start()
     {
@@ -25,48 +28,30 @@ public class ObstacleManager : MonoBehaviour
 
         clone.SetActive(false);
 
-        obstacles.Add(clone);       
+        obstacles.Enqueue(clone);       
     }
 
-    public bool ExamineActive()
+    public void Return(GameObject obstacle)
     {
-        for (int i = 0; i < obstacles.Count; i++)
-        {
-            if (obstacles[i].activeSelf == false)
-            {
-                return false;
-            }
-        }
+        obstacle.SetActive(false);
 
-        return true;
+        obstacles.Enqueue(obstacle);
     }
 
     public IEnumerator ActiveObstacle()
     {
         while (GameManager.instance.State)
         {
-            random = Random.Range(0, obstacles.Count);
-
-            // 현재 게임 오브젝트가 활성화되어 있는 지 확인합니다.
-            while (obstacles[random].activeSelf == true)
+            if(obstacles.Count <= 0)
             {
-                // 현재 리스트에 있는 모든 게임 오브젝트가 활성화되어 있는 지 확인합니다.
-                if (ExamineActive())
-                {
-                    // 모든 게임 오브젝트가 활성화되어 있다면 게임 오브젝트를 새로 생성한 다음
-                    // obstacles 리스트에 넣어줍니다.
-                    Create();
-                }
-
-                // 현재 인덱스에 있는 게임 오브젝트가 활성화되어 있으면
-                // random 변수의 값을 +1을 해서 다시 검색합니다.
-                random = (random + 1) % obstacles.Count;
+                Create();
             }
 
-            obstacles[random].transform.position = transforms[Random.Range(0, transforms.Length)].position;
+            GameObject obstacle = obstacles.Dequeue();
 
-            obstacles[random].SetActive(true);
+            obstacle.transform.position = transforms[Random.Range(0, transforms.Length)].position;
 
+            obstacle.SetActive(true);
 
             float ratio = (GameManager.instance.Speed - GameManager.instance.InitializeSpeed) / (60f - GameManager.instance.InitializeSpeed);
 
@@ -76,15 +61,25 @@ public class ObstacleManager : MonoBehaviour
 
     public void Deactivate()
     {
-        for (int i = 0; i < obstacles.Count; i++)
+        if(coroutine != null)
         {
-            obstacles[i].gameObject.SetActive(false);
+            StopCoroutine(ActiveObstacle());
+
+            coroutine = null;
+        }
+
+        obstacles.Clear();
+
+        foreach (Transform clone in transform)
+        {
+            clone.gameObject.SetActive(false);
+
+            obstacles.Enqueue(clone.gameObject);
         }
     }
 
-
     public void Execute()
     {
-        StartCoroutine(ActiveObstacle());
+        coroutine = StartCoroutine(ActiveObstacle());
     }
 }

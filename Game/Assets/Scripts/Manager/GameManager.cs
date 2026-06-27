@@ -26,15 +26,12 @@ public class GameManager : Singleton<GameManager>
 
     public void Resume()
     {
-        if(callback != null)
+        speed = initializeSpeed;
+
+        if (callback != null)
         {
             callback.Invoke();
         }
-    }
-
-    public void Lanuch()
-    {
-        State = true;
     }
 
     public void Increase()

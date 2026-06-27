@@ -1,0 +1,41 @@
+<linker>
+	<assembly fullname="Assembly-CSharp" ignoreIfMissing="1">
+		<type fullname="DistanceManager">
+			<method name="Initialize"/>
+		</type>
+		<type fullname="Menu">
+			<method name="Continue"/>
+			<method name="Credit"/>
+			<method name="LeaderBoard"/>
+			<method name="Reset"/>
+		</type>
+		<type fullname="MouseManager">
+			<method name="EnableMode"/>
+		</type>
+		<type fullname="ObstacleManager">
+			<method name="Deactivate"/>
+			<method name="Execute"/>
+		</type>
+		<type fullname="RoadManager">
+			<method name="InitializePosition"/>
+			<method name="InitializePosition"/>
+			<method name="InitializePosition"/>
+			<method name="InitializePosition"/>
+			<method name="InitializePosition"/>
+		</type>
+		<type fullname="ScreenManager">
+			<method name="FadeOut"/>
+		</type>
+	</assembly>
+	<assembly fullname="UnityEngine.AnimationModule" ignoreIfMissing="1">
+		<type fullname="UnityEngine.Animator">
+			<method name="SetTrigger"/>
+		</type>
+	</assembly>
+	<assembly fullname="UnityEngine.CoreModule" ignoreIfMissing="1">
+		<type fullname="UnityEngine.GameObject">
+			<method name="SetActive"/>
+			<method name="SetActive"/>
+		</type>
+	</assembly>
+</linker>

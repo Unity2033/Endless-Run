@@ -1,18 +1,23 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 
 public class AudioManager : Singleton<AudioManager>
 {
+    private Coroutine coroutine;
+
+    [SerializeField] float duration = 1.0f;
+
     [SerializeField] AudioSource effectSource;
     [SerializeField] AudioSource scenerySource;
 
     private void Start()
     {
         scenerySource.loop = true;
+
+        scenerySource.clip = Resources.Load<AudioClip>("Audios/" + "Game");
+
+        scenerySource.Play();
     }
 
     public void Listen(string name)
@@ -20,25 +25,37 @@ public class AudioManager : Singleton<AudioManager>
         effectSource.PlayOneShot(Resources.Load<AudioClip>("Audios/" + name));
     }
 
-    public void ScenerySound(string name)
+    public void Stop()
     {
-        scenerySource.clip = Resources.Load<AudioClip>("Audios/" + name);
+        if (coroutine != null)
+        {
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = StartCoroutine(Fade());
+    }
+
+    IEnumerator Fade()
+    {
+        float startVolume = scenerySource.volume;
+
+        float time = 0f;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+
+            scenerySource.volume = Mathf.Lerp(startVolume, 0f, time / duration);
+
+            yield return null;
+        }
+
+        scenerySource.Stop();
+
+        scenerySource.volume = startVolume;
 
         scenerySource.Play();
-    }
 
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-         ScenerySound(scene.name);
-    }
-
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
+        coroutine = null;
     }
 }

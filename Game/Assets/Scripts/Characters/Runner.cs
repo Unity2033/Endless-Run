@@ -56,6 +56,8 @@ public class Runner : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (GameManager.instance.State == false) return;
+
         Vector3 nextPosition = new Vector3(positionX * (int)roadLine, rigidBody.position.y, rigidBody.position.z);
 
         rigidBody.linearVelocity = (nextPosition - rigidBody.position) * factor;
@@ -71,20 +73,24 @@ public class Runner : MonoBehaviour
 
         GameManager.instance.State = false;
 
+        AudioManager.instance.Stop();
+
         AudioManager.instance.Listen("Conflict");
+
+        rigidBody.linearVelocity = Vector3.zero;
+        rigidBody.angularVelocity = Vector3.zero;
     }
 
     public void Resume()
-    {
-        GameManager.instance.Resume();
-    }
-
-    public void Reset()
     {
         roadLine = Line.MIDDLE;
         previousLine = Line.MIDDLE;
 
         animator.Play("Idle");
+
+        rigidBody.position = Vector3.zero;
+
+        GameManager.instance.Resume();
     }
 
     void OnCollisionEnter(Collision collision)

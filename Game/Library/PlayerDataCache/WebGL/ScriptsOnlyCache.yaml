@@ -2,20 +2,19 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp:
     - Obstacle
+    - Sensor
     Assembly-CSharp.dll:
     - AudioManager
-    - CinemachineCamera
+    - DataManager
+    - DistanceManager
     - GameManager
-    - InteractZone
+    - Menu
     - MouseManager
     - ObstacleManager
     - Road
     - RoadManager
     - Runner
-    - SceneryManager
     - ScreenManager
-    - SpeedManager
-    - TimeManager
     Cinemachine.dll:
     - Cinemachine.CinemachineBrain
     - Cinemachine.CinemachineComposer
@@ -26,6 +25,9 @@ ScriptsOnlyBuild:
     - UnityEngine.InputSystem.InputSettings
     - UnityEngine.InputSystem.InputSystemObject
     - UnityEngine.InputSystem.RemoteInputPlayerConnection
+    Unity.Play.Publisher.Editor.dll:
+    - Unity.Play.Publisher.Editor.AnalyticsHelper
+    - Unity.Play.Publisher.Editor.PublisherWindow
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro:
@@ -35,6 +37,7 @@ ScriptsOnlyBuild:
     - TMPro.TMP_StyleSheet
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
+    - TMPro.TextMeshProUGUI
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -53,10 +56,12 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
     - UnityEngine.UI.Shadow
     - UnityEngine.UI.Text
+    - UnityEngine.UI.VerticalLayoutGroup
   serializedClasses:
     Cinemachine:
     - Cinemachine.CinemachineBlendDefinition
@@ -75,11 +80,13 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteCharacter
     - TMPro.TMP_SpriteGlyph
     - TMPro.TMP_Style
+    - TMPro.VertexGradient
     UnityEngine.CoreModule:
     - UnityEngine.Events.ArgumentCache
     - UnityEngine.Events.PersistentCallGroup
     - UnityEngine.Events.PersistentListenerMode
     - UnityEngine.Events.UnityEvent
+    - UnityEngine.RectOffset
     UnityEngine.TextCoreFontEngineModule:
     - UnityEngine.TextCore.FaceInfo
     - UnityEngine.TextCore.Glyph
@@ -113,13 +120,43 @@ ScriptsOnlyBuild:
     fullTypeName: RoadManager
     methodName: InitializePosition
   - assembly: Assembly-CSharp
-    fullTypeName: GameManager
-    methodName: Resume
+    fullTypeName: Menu
+    methodName: LeaderBoard
   - assembly: Assembly-CSharp
-    fullTypeName: GameManager
+    fullTypeName: Menu
+    methodName: Continue
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
+  - assembly: UnityEngine.AnimationModule
+    fullTypeName: UnityEngine.Animator
+    methodName: SetTrigger
+  - assembly: Assembly-CSharp
+    fullTypeName: ObstacleManager
     methodName: Execute
+  - assembly: Assembly-CSharp
+    fullTypeName: MouseManager
+    methodName: EnableMode
+  - assembly: Assembly-CSharp
+    fullTypeName: ObstacleManager
+    methodName: Deactivate
+  - assembly: UnityEngine.CoreModule
+    fullTypeName: UnityEngine.GameObject
+    methodName: SetActive
+  - assembly: Assembly-CSharp
+    fullTypeName: ScreenManager
+    methodName: FadeOut
+  - assembly: Assembly-CSharp
+    fullTypeName: DistanceManager
+    methodName: Initialize
+  - assembly: Assembly-CSharp
+    fullTypeName: Menu
+    methodName: Reset
+  - assembly: Assembly-CSharp
+    fullTypeName: Menu
+    methodName: Credit
   sceneClasses:
-    Assets/Scenes/Intro.unity:
+    Assets/Scenes/Game.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -160,68 +197,76 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 104
       Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 25528}
+      Script: {instanceID: 28028}
     - Class: 114
-      Script: {instanceID: 26014}
+      Script: {instanceID: 28294}
     - Class: 114
-      Script: {instanceID: 26074}
+      Script: {instanceID: 28640}
     - Class: 114
-      Script: {instanceID: 26576}
+      Script: {instanceID: 28718}
     - Class: 114
-      Script: {instanceID: 26954}
+      Script: {instanceID: 28848}
     - Class: 114
-      Script: {instanceID: 27272}
+      Script: {instanceID: 29342}
     - Class: 114
-      Script: {instanceID: 27778}
+      Script: {instanceID: 29694}
     - Class: 114
-      Script: {instanceID: 28002}
+      Script: {instanceID: 29876}
     - Class: 114
-      Script: {instanceID: 28042}
+      Script: {instanceID: 30240}
     - Class: 114
-      Script: {instanceID: 28166}
+      Script: {instanceID: 30926}
     - Class: 114
-      Script: {instanceID: 28250}
+      Script: {instanceID: 31178}
     - Class: 114
-      Script: {instanceID: 28272}
+      Script: {instanceID: 31206}
     - Class: 114
-      Script: {instanceID: 28998}
+      Script: {instanceID: 31264}
     - Class: 114
-      Script: {instanceID: 29066}
+      Script: {instanceID: 31544}
     - Class: 114
-      Script: {instanceID: 29526}
+      Script: {instanceID: 32146}
     - Class: 114
-      Script: {instanceID: 29630}
+      Script: {instanceID: 32238}
     - Class: 114
-      Script: {instanceID: 29692}
+      Script: {instanceID: 32472}
     - Class: 114
-      Script: {instanceID: 29900}
+      Script: {instanceID: 32556}
     - Class: 114
-      Script: {instanceID: 29902}
+      Script: {instanceID: 33110}
     - Class: 114
-      Script: {instanceID: 30522}
+      Script: {instanceID: 33298}
     - Class: 114
-      Script: {instanceID: 30584}
+      Script: {instanceID: 33564}
     - Class: 114
-      Script: {instanceID: 30846}
+      Script: {instanceID: 34288}
     - Class: 114
-      Script: {instanceID: 31294}
+      Script: {instanceID: 34376}
     - Class: 114
-      Script: {instanceID: 31504}
+      Script: {instanceID: 34442}
     - Class: 114
-      Script: {instanceID: 31718}
+      Script: {instanceID: 34756}
     - Class: 114
-      Script: {instanceID: 31792}
+      Script: {instanceID: 35594}
     - Class: 114
-      Script: {instanceID: 31840}
+      Script: {instanceID: 35848}
     - Class: 114
-      Script: {instanceID: 31980}
+      Script: {instanceID: 35928}
     - Class: 114
-      Script: {instanceID: 32286}
+      Script: {instanceID: 35984}
     - Class: 114
-      Script: {instanceID: 32650}
+      Script: {instanceID: 36150}
     - Class: 114
-      Script: {instanceID: 32706}
+      Script: {instanceID: 36544}
+    - Class: 114
+      Script: {instanceID: 37006}
+    - Class: 114
+      Script: {instanceID: 37084}
+    - Class: 114
+      Script: {instanceID: 38948}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -317,13 +362,13 @@ ScriptsOnlyBuild:
     className: UnityOnControllerColliderHitMessageListener
   - hash:
       serializedVersion: 2
-      Hash: e061bdd0159a784b8acc0552dd0f40bb
+      Hash: b9404a1bead62725906b97daa22b9fe0
     assemblyName: Unity.InputSystem
     namespaceName: UnityEngine.InputSystem.Editor
     className: InputDebuggerWindow
   - hash:
       serializedVersion: 2
-      Hash: add9c26f58fd4e7134875ed9ad9e086c
+      Hash: a2d74d9d871bf22b6e1ffec8025cd3b1
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: AudioManager
@@ -359,6 +404,12 @@ ScriptsOnlyBuild:
     className: UnityOnTriggerExitMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 6fed6b11afff4fd8fea3fd1040747bc4
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Menu
+  - hash:
+      serializedVersion: 2
       Hash: 1ce63d97d1ca25cba2d91d5f32fd5f79
     assemblyName: Unity.VisualScripting.State
     namespaceName: Unity.VisualScripting
@@ -377,7 +428,7 @@ ScriptsOnlyBuild:
     className: PlayerInputEditor
   - hash:
       serializedVersion: 2
-      Hash: dbe80c9dc024d18e75107a0b4da06133
+      Hash: daeac1347f8039f61cd4017ff33bd3c6
     assemblyName: Unity.InputSystem
     namespaceName: UnityEngine.InputSystem.UI
     className: InputSystemUIInputModule
@@ -461,7 +512,7 @@ ScriptsOnlyBuild:
     className: CinemachineConfiner
   - hash:
       serializedVersion: 2
-      Hash: 285b9728cb2452ee51c717d0f19e8350
+      Hash: 15d30e89fefd40141614d0ea22b0da70
     assemblyName: Cinemachine
     namespaceName: Cinemachine
     className: CinemachineConfiner2D
@@ -503,16 +554,22 @@ ScriptsOnlyBuild:
     className: UnityOnMouseExitMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 4567fcd9951362bca9b72658333f7f2e
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: Sensor
+  - hash:
+      serializedVersion: 2
       Hash: 1de42070c8cfb5ce0dd077efe6147882
     assemblyName: Cinemachine
     namespaceName: Cinemachine
     className: Cinemachine3rdPersonFollow
   - hash:
       serializedVersion: 2
-      Hash: 95d150d1745ddac345d4cdf11ad7779a
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: ScreenManager
+      Hash: f34cc490b6857195b9cdb30787d4b96f
+    assemblyName: UnityEngine.UI
+    namespaceName: UnityEngine.UIElements
+    className: WorldDocumentRaycaster
   - hash:
       serializedVersion: 2
       Hash: e636708ac1677b6f3be0cafe31e1bf77
@@ -533,13 +590,19 @@ ScriptsOnlyBuild:
     className: RectMask2D
   - hash:
       serializedVersion: 2
+      Hash: 2a467dfb2850948f62e4dab61d877f79
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: ScreenManager
+  - hash:
+      serializedVersion: 2
       Hash: 09a9ebb3299853f8a1d66f750e11097e
     assemblyName: Cinemachine
     namespaceName: Cinemachine
     className: CinemachinePOV
   - hash:
       serializedVersion: 2
-      Hash: 5a25c7516fadef3552c99f55215749d0
+      Hash: 0054fbf0021ca5612162a3774c6c6836
     assemblyName: Unity.InputSystem
     namespaceName: UnityEngine.InputSystem.Editor
     className: InputDeviceDebuggerWindow
@@ -575,7 +638,7 @@ ScriptsOnlyBuild:
     className: Image
   - hash:
       serializedVersion: 2
-      Hash: 0126f347d98d02424c7e030465a71ead
+      Hash: 5a05675e5b5c0c8c190a444786eea8f4
     assemblyName: Unity.InputSystem
     namespaceName: UnityEngine.InputSystem.HID.Editor
     className: HIDDescriptorWindow
@@ -629,16 +692,16 @@ ScriptsOnlyBuild:
     className: HorizontalLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: ff76cf6cf52b4db7b95af6ffadca9288
-    assemblyName: Unity.Timeline
-    namespaceName: UnityEngine.Timeline
-    className: SignalEmitter
-  - hash:
-      serializedVersion: 2
       Hash: c4cdb902228df56d5b2b639d6a6bbd3c
     assemblyName: Unity.InputSystem
     namespaceName: UnityEngine.InputSystem
     className: PlayerInputManager
+  - hash:
+      serializedVersion: 2
+      Hash: ff76cf6cf52b4db7b95af6ffadca9288
+    assemblyName: Unity.Timeline
+    namespaceName: UnityEngine.Timeline
+    className: SignalEmitter
   - hash:
       serializedVersion: 2
       Hash: 0f19765290d81f9e93eff7828a091d40
@@ -695,10 +758,22 @@ ScriptsOnlyBuild:
     className: AspectRatioFitter
   - hash:
       serializedVersion: 2
+      Hash: 8fc129c4c79d353ce826c613ba2f89ff
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: DataManager
+  - hash:
+      serializedVersion: 2
       Hash: da5a949a0bbd2ff91bc51c5805c2c41f
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnMouseUpAsButtonMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: ff5172bc81dc2da4c7de2a8bf56dc4b8
+    assemblyName: Unity.InputSystem
+    namespaceName: UnityEngine.InputSystem.Editor
+    className: InputActionsEditorWindow
   - hash:
       serializedVersion: 2
       Hash: 9104447b683bf70406fa01f12ecb564a
@@ -749,12 +824,6 @@ ScriptsOnlyBuild:
     className: CinemachineCameraOffset
   - hash:
       serializedVersion: 2
-      Hash: a9f52207ad35abfa391dbd2583a9d299
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: InteractZone
-  - hash:
-      serializedVersion: 2
       Hash: 191c3402cd43ee08f0a96795440c294e
     assemblyName: Unity.InputSystem
     namespaceName: UnityEngine.InputSystem.Editor
@@ -773,19 +842,13 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
-      Hash: e47d77dff9f7fd0f54480d10a98b411f
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: GameManager
-  - hash:
-      serializedVersion: 2
       Hash: 95426d463074947dcbffc797c44e779c
     assemblyName: Unity.InputSystem
     namespaceName: UnityEngine.InputSystem.UI.Editor
     className: StandaloneInputModuleModuleEditor
   - hash:
       serializedVersion: 2
-      Hash: 061a5d77ce0aa52a60c21c566c6d8af2
+      Hash: 4663ce278bf334bc7cb334ea8061129e
     assemblyName: Unity.AI.Navigation
     namespaceName: Unity.AI.Navigation
     className: NavMeshModifierVolume
@@ -827,7 +890,7 @@ ScriptsOnlyBuild:
     className: PositionAsUV1
   - hash:
       serializedVersion: 2
-      Hash: 4895209f48657ff949db7815a6062743
+      Hash: 0a4ef3c4e73b2f3eef913e2325924084
     assemblyName: Unity.InputSystem
     namespaceName: UnityEngine.InputSystem
     className: InputSettings
@@ -869,13 +932,19 @@ ScriptsOnlyBuild:
     className: ContentSizeFitter
   - hash:
       serializedVersion: 2
+      Hash: d01a65cabba21a1e608f0dbfdac043e5
+    assemblyName: Assembly-CSharp
+    namespaceName: 
+    className: DistanceManager
+  - hash:
+      serializedVersion: 2
       Hash: 51b80d3734ea86b38e3101db98029e15
     assemblyName: Unity.Timeline
     namespaceName: UnityEngine.Timeline
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 68f2cb287af2eee1f639824485a3402b
+      Hash: 423a204f105739da55558e8e0d136a67
     assemblyName: Unity.AI.Navigation
     namespaceName: Unity.AI.Navigation
     className: NavMeshModifier
@@ -905,7 +974,7 @@ ScriptsOnlyBuild:
     className: EventTrigger
   - hash:
       serializedVersion: 2
-      Hash: 1088c6ea15c29a333e0397a02285a6ac
+      Hash: b682f2b353a25c013902a4c0a18f01c5
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: Obstacle
@@ -983,10 +1052,10 @@ ScriptsOnlyBuild:
     className: Dropdown
   - hash:
       serializedVersion: 2
-      Hash: 52dabdf80f42114c7fcbc42ab95d3963
+      Hash: 1fed23f6618d6e6b230c9b5fafd15474
     assemblyName: Assembly-CSharp
     namespaceName: 
-    className: SpeedManager
+    className: GameManager
   - hash:
       serializedVersion: 2
       Hash: a99265337bbcb574a8c61bbdc198821a
@@ -999,12 +1068,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core
     namespaceName: Unity.VisualScripting
     className: UnityOnToggleValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: f13a806dbe78d96d702ad11853d0baa9
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: CinemachineCamera
   - hash:
       serializedVersion: 2
       Hash: a3901985eb076c1c9b7562fca82ca3e0
@@ -1055,16 +1118,10 @@ ScriptsOnlyBuild:
     className: CinemachineIndependentImpulseListener
   - hash:
       serializedVersion: 2
-      Hash: ff71db1a48de41d3a8a5ffdfae1ea607
+      Hash: 08e2446b65d2da7600c6bbdd36de0e56
     assemblyName: Unity.InputSystem
     namespaceName: UnityEngine.InputSystem
     className: InputSystemObject
-  - hash:
-      serializedVersion: 2
-      Hash: 7e06eb696bd29bd58eecab60b3c335b9
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: TimeManager
   - hash:
       serializedVersion: 2
       Hash: b5007673bbbdb9d12597a1d8201370f5
@@ -1253,7 +1310,7 @@ ScriptsOnlyBuild:
     className: UnityOnTransformParentChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 42284ecb06b05bfc619be3758fa5dd7a
+      Hash: d85292b1d7ddb10e5a2df5d221dcba86
     assemblyName: Unity.InputSystem
     namespaceName: UnityEngine.InputSystem
     className: InputActionAsset
@@ -1271,13 +1328,13 @@ ScriptsOnlyBuild:
     className: SceneVariables
   - hash:
       serializedVersion: 2
-      Hash: ece1e4406dfd0bdc7f9516e4d85e1941
+      Hash: a4ba242ad7c19ed77c775b388363e75c
     assemblyName: Unity.AI.Navigation
     namespaceName: Unity.AI.Navigation
     className: NavMeshLink
   - hash:
       serializedVersion: 2
-      Hash: d55992199bd2f5a5502658391cdf8ba7
+      Hash: 10399b4e44f874d68a2dad01fa7b8c30
     assemblyName: Unity.AI.Navigation
     namespaceName: Unity.AI.Navigation
     className: NavMeshSurface
@@ -1325,6 +1382,12 @@ ScriptsOnlyBuild:
     className: InputField
   - hash:
       serializedVersion: 2
+      Hash: 4001f3727b45ffa51ecc45ba969b4108
+    assemblyName: Unity.Recorder
+    namespaceName: UnityEngine.Recorder
+    className: RecorderBindings
+  - hash:
+      serializedVersion: 2
       Hash: 07ac5abbf1211711231ba9fc21c550e6
     assemblyName: Cinemachine
     namespaceName: Cinemachine
@@ -1367,12 +1430,6 @@ ScriptsOnlyBuild:
     className: CinemachineVolumeSettings
   - hash:
       serializedVersion: 2
-      Hash: beedcd3349524192ec33a0136c54519b
-    assemblyName: Assembly-CSharp
-    namespaceName: 
-    className: SceneryManager
-  - hash:
-      serializedVersion: 2
       Hash: 0515d3107a65fdbab3ad88c2c94de99f
     assemblyName: Cinemachine
     namespaceName: Cinemachine
@@ -1409,7 +1466,7 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
-      Hash: 5015c05a2113f320567617675a1ebe33
+      Hash: dd8ec7a642dbaa57390a077c7a9c1fdf
     assemblyName: Unity.InputSystem
     namespaceName: UnityEngine.InputSystem.Editor
     className: InputStateWindow
@@ -1427,7 +1484,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 9ebb206587356b4f57cd7f4108f0f87f
+      Hash: 810e3c228b295cc60c4de2cdd94b18cb
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
     className: TMP_SpriteAsset
@@ -1445,7 +1502,7 @@ ScriptsOnlyBuild:
     className: UnityOnEndDragMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 1799e2459e3f656b6f21094fd998eaee
+      Hash: e6b258489c88376c5869946b2735e7e5
     assemblyName: Unity.TextMeshPro
     namespaceName: TMPro
     className: TMP_FontAsset
@@ -1469,7 +1526,7 @@ ScriptsOnlyBuild:
     className: AudioPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: e04c8f665838608944087fab0bcbfe2d
+      Hash: 5e83b763be2944935f92a25abfe0327f
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: ObstacleManager
@@ -1559,7 +1616,7 @@ ScriptsOnlyBuild:
     className: ToggleGroup
   - hash:
       serializedVersion: 2
-      Hash: eba1d5a56faab46bb19095528ec7bea9
+      Hash: 19c78d685aed4daf16304c23ebac1538
     assemblyName: Assembly-CSharp
     namespaceName: 
     className: Runner
@@ -1583,7 +1640,7 @@ ScriptsOnlyBuild:
     className: UnityOnBecameInvisibleMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 800d7bbf0edb0055aeacdbfbe84a84b8
+      Hash: ca93c3ab9e0e54347eaf25619d6c1d83
     assemblyName: Unity.InputSystem
     namespaceName: UnityEngine.InputSystem.Editor
     className: InputActionEditorWindow
@@ -1607,5 +1664,6 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   platform: 20
   scenePathNames:
-  - Assets/Scenes/Intro.unity
-  playerPath: C:/Users/nwond/Endless-Run/Game/Build
+  - Assets/Scenes/Game.unity
+  playerPath: "C:/Users/nwond/OneDrive/\uBC14\uD0D5 \uD654\uBA74/Endless-Run/Game/WebGL
+    Builds"

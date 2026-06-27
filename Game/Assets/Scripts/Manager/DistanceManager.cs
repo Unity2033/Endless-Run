@@ -11,22 +11,23 @@ public class DistanceManager : MonoBehaviour
 
     float distance;
 
-    public void Execute()
+    private void Update()
     {
-        StartCoroutine(Increase());
+        if (GameManager.instance.State == false) return;
+         
+        distance += pace * Time.deltaTime;
+
+        distanceText.text = $"{Mathf.FloorToInt(distance)}m";
     }
 
-    private IEnumerator Increase()
+    public void Initialize()
     {
-        while(GameManager.instance.State)
-        {
-            distance += pace * Time.deltaTime;
-
-            distanceText.text = $"{Mathf.FloorToInt(distance)}m";
-
-            yield return null;
-        }
-
         DataManager.instance.Save(distance);
+
+        distance = 0;
+
+        distanceText.text = $"{Mathf.FloorToInt(distance)}m";
     }
 }
+
+

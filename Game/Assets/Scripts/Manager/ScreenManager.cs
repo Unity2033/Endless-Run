@@ -1,21 +1,30 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScreenManager : MonoBehaviour
 {
+    private Coroutine coroutine;
+
     [SerializeField] float duration = 1.0f;
 
     [SerializeField] Image screenImage;
 
     public void FadeIn()
     {
-        StartCoroutine(Fade(0f, 1f));
+        if (coroutine != null)
+            StopCoroutine(coroutine);
+
+        coroutine = StartCoroutine(Fade(screenImage.color.a, 1f));
     }
 
     public void FadeOut()
     {
-        StartCoroutine(Fade(1f, 0f));
+        if (coroutine != null)
+            StopCoroutine(coroutine);
+
+        coroutine = StartCoroutine(Fade(screenImage.color.a, 0f));
     }
 
     IEnumerator Fade(float start, float end)
@@ -29,14 +38,14 @@ public class ScreenManager : MonoBehaviour
             time += Time.deltaTime;
 
             color.a = Mathf.Lerp(start, end, time / duration);
-
             screenImage.color = color;
 
             yield return null;
         }
 
         color.a = end;
-
         screenImage.color = color;
+
+        coroutine = null;
     }
 }
